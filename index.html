@@ -1,0 +1,1777 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Lumi — 당신 곁의 따뜻한 빛</title>
+<meta name="theme-color" content="#6B5FD6">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Lumi">
+<meta name="description" content="익명으로, 판단 없이, 오늘 마음을 나눠요. 당신 곁의 따뜻한 빛 Lumi">
+<meta property="og:title" content="Lumi — 당신 곁의 따뜻한 빛">
+<meta property="og:description" content="익명으로, 판단 없이, 오늘 마음을 나눠요.">
+<meta property="og:type" content="website">
+<meta name="keywords" content="정신건강,감정,커뮤니티,마음,위로,익명,상담,우울,불안">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;600&family=Gowun+Dodum&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1C1A18;--ink2:#4A4640;--ink3:#8A857E;--cream:#FAF8F4;
+--purple:#6B5FD6;--pl:#EAE7FF;--teal:#2D9E82;--tl:#E0F5EE;
+--coral:#E8604A;--cl:#FDECEA;--amber:#D4921A;--al:#FDF3E0;
+--green:#4A9B5F;--gl:#E8F5EC;--pink:#C0509A;--pkl:#FBEAF0;
+--blue:#3B7DD8;--bl:#E8F0FC;--gold:#F0A500;--goldl:#FFF8E7;
+--bd:rgba(28,26,24,.09);--r:16px;--rs:10px;}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;font-family:'DM Sans','Gowun Dodum',sans-serif;background:#111;overflow:hidden}
+.device{width:100%;max-width:390px;height:100vh;max-height:844px;background:#fff;
+margin:0 auto;overflow:hidden;display:flex;flex-direction:column;position:relative}
+@media(min-height:900px){.device{border-radius:48px;height:844px;margin-top:calc(50vh - 422px);
+box-shadow:0 0 0 12px #1a1a1a,0 40px 100px rgba(0,0,0,.8)}}
+
+/* 페이지: show 클래스가 있을 때만 보임 */
+.pg{display:none;width:100%;height:100%;flex-direction:column;overflow:hidden}
+.pg.show{display:flex}
+
+/* 공통 */
+.topbar{padding:14px 16px 10px;display:flex;align-items:center;justify-content:space-between;
+border-bottom:1px solid var(--bd);background:#fff;flex-shrink:0}
+.logo{font-family:'DM Serif Display',serif;font-size:21px;color:var(--ink)}
+.logo em{color:var(--purple);font-style:normal}
+.nav{display:flex;border-top:1px solid var(--bd);background:#fff;flex-shrink:0}
+.ni{flex:1;padding:10px 4px 12px;text-align:center;cursor:pointer;font-size:10px;
+color:var(--ink3);border-top:2px solid transparent;display:flex;flex-direction:column;
+align-items:center;gap:3px;transition:color .15s}
+.ni.on{color:var(--purple);border-top-color:var(--purple)}
+.ni svg{width:18px;height:18px}
+.scr{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px}
+.grade-pill{font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;
+background:var(--pl);color:var(--purple);cursor:pointer}
+
+/* ── SPLASH ── */
+#pg-splash{background:var(--ink);justify-content:center;align-items:center;
+padding:52px 36px;text-align:center}
+.sp-orb{width:100px;height:100px;border-radius:50%;
+background:radial-gradient(circle,#A99EE8,var(--purple) 60%);
+display:flex;align-items:center;justify-content:center;margin-bottom:28px;
+animation:pulse 3s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+.sp-orb svg{width:44px;height:44px}
+.sp-name{font-family:'DM Serif Display',serif;font-size:56px;color:#fff;
+letter-spacing:-2px;margin-bottom:10px}
+.sp-tag{font-size:14px;color:rgba(255,255,255,.45);line-height:1.7;margin-bottom:48px}
+.sp-btn{width:100%;padding:16px;background:var(--purple);color:#fff;border:none;
+border-radius:var(--r);font-size:16px;font-weight:500;cursor:pointer;
+font-family:'DM Sans',sans-serif}
+.sp-fine{margin-top:14px;font-size:11px;color:rgba(255,255,255,.22);line-height:1.65}
+
+/* ── ONBOARD ── */
+#pg-onboard{justify-content:center;align-items:center;padding:40px 32px}
+.ob-dots{display:flex;gap:6px;justify-content:center;margin-bottom:32px}
+.ob-dot{width:7px;height:7px;border-radius:50%;background:var(--bd);transition:all .3s}
+.ob-dot.on{width:20px;border-radius:4px;background:var(--purple)}
+.ob-step{display:none;flex-direction:column;align-items:center;text-align:center;
+width:100%;max-width:300px}
+.ob-step.show{display:flex}
+.ob-em{font-size:62px;margin-bottom:22px}
+.ob-title{font-family:'DM Serif Display',serif;font-size:26px;color:var(--ink);
+margin-bottom:12px;line-height:1.2}
+.ob-desc{font-size:14px;color:var(--ink3);line-height:1.8;margin-bottom:36px}
+.ob-btn{width:100%;padding:14px;background:var(--ink);color:#fff;border:none;
+border-radius:var(--r);font-size:14px;font-weight:500;cursor:pointer;
+font-family:'DM Sans',sans-serif;margin-bottom:10px}
+.ob-skip{background:none;border:none;font-size:12px;color:var(--ink3);cursor:pointer;
+font-family:'DM Sans',sans-serif}
+
+/* ── HOME ── */
+.ez-zone{background:var(--ink);border-radius:22px;padding:18px;margin-bottom:12px;
+position:relative;overflow:hidden}
+.ez-zone-bg{position:absolute;inset:0;
+background:radial-gradient(ellipse at 50% -10%,#3D3580,var(--ink) 70%)}
+.ez{position:relative}
+.ez-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.av-box{width:58px;height:58px;flex-shrink:0}
+.av-box svg{width:100%;height:100%}
+.ez-msg-str{font-size:13px;color:#fff;display:block;margin-bottom:2px;font-weight:500}
+.ez-msg-sub{font-size:11px;color:rgba(255,255,255,.5)}
+.emo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+.eb{padding:8px 3px;border-radius:9px;text-align:center;cursor:pointer;
+border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.06);
+color:rgba(255,255,255,.7);font-size:9px;font-weight:500;
+transition:all .15s;line-height:1.3}
+.eb .ef{display:block;font-size:14px;margin-bottom:2px;font-family:monospace}
+.eb.on{background:var(--purple);border-color:var(--purple);color:#fff}
+
+/* AI 카드 */
+.ai-card{border-radius:18px;padding:16px;margin-bottom:12px;
+border:1px solid var(--bd);display:none}
+.ai-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.ai-lbl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+color:var(--purple);display:flex;align-items:center;gap:4px}
+.ai-lbl-dot{width:5px;height:5px;border-radius:50%;background:var(--purple)}
+.ai-etag{font-size:10px;font-weight:600;padding:3px 8px;border-radius:10px}
+.ai-advice{font-size:13px;line-height:1.8;font-style:italic;
+font-family:'DM Serif Display',serif;color:var(--ink);margin-bottom:10px}
+.ai-qbox{border-radius:var(--rs);padding:10px 12px;border-left:2px solid}
+.ai-qcat{font-size:9px;font-weight:700;letter-spacing:.08em;
+text-transform:uppercase;margin-bottom:3px}
+.ai-qtext{font-size:12px;line-height:1.6;font-style:italic;color:var(--ink)}
+.ai-qsrc{font-size:10px;color:var(--ink3);margin-top:3px;text-align:right}
+.ai-btns{display:flex;gap:7px;margin-top:10px}
+.ai-btn{flex:1;padding:9px;border-radius:var(--rs);font-size:11px;font-weight:500;
+cursor:pointer;border:1px solid var(--bd);background:var(--cream);
+color:var(--ink2);text-align:center;font-family:'DM Sans',sans-serif}
+.ai-btn.pri{background:var(--purple);color:#fff;border-color:var(--purple)}
+
+/* 홈 하단 */
+.home-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.infl-box{background:var(--cream);border-radius:var(--r);padding:12px;
+border:.5px solid var(--bd)}
+.infl-lbl{font-size:9px;font-weight:600;color:var(--ink3);letter-spacing:.05em;
+text-transform:uppercase;margin-bottom:8px}
+.infl-row{display:flex;justify-content:space-between;font-size:10px;
+color:var(--ink2);margin-bottom:5px}
+.infl-row b{font-weight:600;color:var(--ink)}
+.gmc{background:var(--ink);border-radius:var(--r);padding:12px;
+position:relative;overflow:hidden;cursor:pointer}
+.gmc-bg{position:absolute;inset:0;
+background:radial-gradient(ellipse at 0% 50%,#3D3580,var(--ink) 60%)}
+.gmc-i{position:relative}
+.dp-prev{border:.5px solid var(--bd);border-radius:var(--r);
+padding:12px;margin-bottom:12px;cursor:pointer}
+
+/* ── WORDS ── */
+.dcard{border-radius:18px;padding:18px;margin-bottom:9px;cursor:pointer}
+.dc-foot{display:flex;align-items:center;justify-content:space-between;
+margin-top:10px;padding-top:8px;border-top:1px solid rgba(0,0,0,.07)}
+.more-btn{width:100%;padding:11px;border:1px dashed var(--bd);border-radius:var(--r);
+background:none;font-size:11px;color:var(--ink3);cursor:pointer;
+font-family:'DM Sans',sans-serif;margin-bottom:12px;
+display:flex;align-items:center;justify-content:center;gap:5px}
+.cat-explore{display:none;margin-bottom:12px}
+.cat-item{padding:9px 11px;border-radius:var(--rs);border:.5px solid var(--bd);
+margin-bottom:5px;cursor:pointer;background:#fff}
+.ci-text{font-size:11px;line-height:1.6;font-style:italic;
+font-family:'DM Serif Display',serif;margin-bottom:2px}
+.ci-src{font-size:10px;color:var(--ink3)}
+
+/* ── COMMUNITY ── */
+.feed-tabs{display:flex;padding:10px 14px 0;border-bottom:1px solid var(--bd);
+flex-shrink:0;overflow-x:auto}
+.feed-tabs::-webkit-scrollbar{display:none}
+.ft{padding:8px 12px;font-size:12px;font-weight:500;color:var(--ink3);cursor:pointer;
+border-bottom:2px solid transparent;white-space:nowrap}
+.ft.on{color:var(--purple);border-bottom-color:var(--purple)}
+.feed-scr{flex:1;overflow-y:auto;padding:10px 12px;position:relative}
+.best-banner{background:linear-gradient(135deg,#2D1B69,#1a1060);
+border-radius:18px;padding:14px 16px;margin-bottom:10px;cursor:pointer;
+position:relative;overflow:hidden}
+.bb-glow{position:absolute;inset:0;
+background:radial-gradient(ellipse at 80% 20%,rgba(240,165,0,.25),transparent 60%)}
+.bb-in{position:relative}
+.bb-badge{display:inline-block;background:var(--gold);color:#1a1060;
+font-size:9px;font-weight:700;padding:3px 9px;border-radius:20px;margin-bottom:8px}
+.bb-title{font-family:'DM Serif Display',serif;font-size:14px;
+color:#fff;line-height:1.5;margin-bottom:8px}
+.bb-meta{display:flex;align-items:center;font-size:10px;color:rgba(255,255,255,.6)}
+.bb-stats{margin-left:auto;display:flex;gap:8px;font-size:10px;color:rgba(255,255,255,.5)}
+.sc{border:.5px solid var(--bd);border-radius:18px;padding:12px 13px;
+margin-bottom:8px;background:#fff}
+.sc.urg{border-color:var(--coral);border-width:1.5px}
+.sc.hot{border-color:var(--gold);background:var(--goldl)}
+.sc-top{display:flex;align-items:center;gap:7px;margin-bottom:7px}
+.sc-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;
+justify-content:center;font-size:10px;font-weight:600;flex-shrink:0}
+.sc-nick{font-size:11px;font-weight:500;color:var(--ink)}
+.sc-grade{font-size:9px;font-weight:600;margin-left:2px}
+.sc-time{font-size:10px;color:var(--ink3)}
+.sc-etag{margin-left:auto;font-size:9px;font-weight:500;
+padding:2px 7px;border-radius:10px;flex-shrink:0}
+.sc-body{font-size:12px;line-height:1.65;color:var(--ink2);margin-bottom:7px}
+.sc-ai{border-radius:var(--rs);padding:7px 10px;margin-bottom:7px;border-left:2px solid}
+.sc-ai-lbl{font-size:8px;font-weight:700;letter-spacing:.06em;
+text-transform:uppercase;margin-bottom:2px}
+.sc-ai-txt{font-size:11px;font-style:italic;line-height:1.55;color:var(--ink)}
+.sc-best-wrap{display:flex;gap:6px;align-items:flex-start;margin-bottom:4px}
+.sc-best-av{width:20px;height:20px;border-radius:50%;background:var(--tl);
+color:var(--teal);display:flex;align-items:center;justify-content:center;
+font-size:8px;flex-shrink:0}
+.sc-best-body{flex:1;background:var(--tl);border-radius:8px;
+padding:5px 8px;border-left:2px solid var(--teal)}
+.sc-more-link{font-size:10px;color:var(--purple);cursor:pointer;
+font-weight:500;margin-top:3px;margin-bottom:5px}
+.sc-foot{display:flex;align-items:center;gap:6px;margin-top:7px;
+padding-top:7px;border-top:.5px solid var(--bd)}
+.sc-act{display:flex;align-items:center;gap:3px;font-size:11px;
+color:var(--ink3);cursor:pointer;background:none;border:none}
+.sc-act svg{width:12px;height:12px}
+.sc-rep{margin-left:auto;font-size:10px;color:var(--ink3);
+background:none;border:none;cursor:pointer;padding:3px 6px;border-radius:7px}
+.fab{position:absolute;bottom:10px;right:16px;width:52px;height:52px;
+border-radius:50%;background:var(--purple);color:#fff;border:none;cursor:pointer;
+display:flex;align-items:center;justify-content:center;
+box-shadow:0 4px 20px rgba(107,95,214,.4);z-index:10}
+.fab svg{width:22px;height:22px}
+.test-box{border:1.5px dashed var(--amber);border-radius:14px;
+padding:11px 13px;margin-bottom:9px;background:var(--al)}
+.test-box h4{font-size:11px;font-weight:600;color:var(--amber);margin-bottom:5px}
+.test-item{font-size:10px;background:#fff;border-radius:7px;
+padding:6px 9px;cursor:pointer;border:.5px solid rgba(212,146,26,.25);margin-bottom:4px}
+
+/* ── DRAWER ── */
+.drw-bg{display:none;position:fixed;inset:0;
+background:rgba(28,26,24,.55);z-index:200}
+.drw-bg.show{display:block}
+.drw{position:fixed;bottom:0;left:50%;
+transform:translateX(-50%) translateY(100%);
+width:100%;max-width:390px;background:#fff;
+border-radius:24px 24px 0 0;max-height:85vh;
+display:flex;flex-direction:column;z-index:201;
+transition:transform .35s cubic-bezier(.4,0,.2,1)}
+.drw.show{transform:translateX(-50%) translateY(0)}
+.drw-handle{width:36px;height:4px;background:#ddd;
+border-radius:2px;margin:12px auto 0}
+.drw-head{padding:10px 16px;border-bottom:.5px solid var(--bd);
+display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.drw-title{font-size:14px;font-weight:500;color:var(--ink)}
+.drw-close{width:28px;height:28px;border-radius:50%;background:var(--cream);
+border:none;cursor:pointer;font-size:16px;
+display:flex;align-items:center;justify-content:center}
+.drw-story{padding:9px 14px;background:var(--cream);
+border-bottom:.5px solid var(--bd);flex-shrink:0;
+font-size:12px;color:var(--ink2);line-height:1.6}
+.drw-story b{display:block;font-size:11px;margin-bottom:3px;color:var(--ink)}
+.cf-strip{display:flex;gap:5px;padding:7px 14px;
+border-bottom:.5px solid var(--bd);flex-shrink:0;overflow-x:auto}
+.cf-strip::-webkit-scrollbar{display:none}
+.cf{font-size:10px;font-weight:500;padding:4px 9px;border-radius:20px;
+border:.5px solid var(--bd);color:var(--ink3);cursor:pointer;
+white-space:nowrap;background:#fff}
+.cf.on{background:var(--purple);color:#fff;border-color:var(--purple)}
+.cmt-list{flex:1;overflow-y:auto;padding:10px 14px}
+.cmt-item{display:flex;gap:8px;margin-bottom:12px}
+.ci-av{width:28px;height:28px;border-radius:50%;
+display:flex;align-items:center;justify-content:center;
+font-size:11px;font-weight:600;flex-shrink:0}
+.ci-body{flex:1}
+.ci-top{display:flex;align-items:center;gap:5px;margin-bottom:3px;flex-wrap:wrap}
+.ci-nick{font-size:11px;font-weight:500;color:var(--ink)}
+.ci-grade{font-size:9px;font-weight:600}
+.ci-time{font-size:10px;color:var(--ink3)}
+.ci-best-badge{font-size:9px;background:var(--teal);color:#fff;
+padding:2px 7px;border-radius:8px;font-weight:500}
+.ci-bubble{background:var(--cream);border-radius:12px 12px 12px 3px;
+padding:8px 10px;margin-bottom:4px;font-size:12px;line-height:1.65;color:var(--ink)}
+.ci-bubble.best{background:var(--tl);border-left:2px solid var(--teal)}
+.ci-acts{display:flex;align-items:center;gap:8px}
+.ci-like{font-size:10px;color:var(--ink3);cursor:pointer;
+background:none;border:none;display:flex;align-items:center;gap:3px}
+.ci-like.on{color:var(--coral)}
+.ci-like svg{width:11px;height:11px}
+.ci-adopt{font-size:9px;color:var(--teal);border:1px solid var(--teal);
+border-radius:8px;padding:2px 8px;cursor:pointer;background:none}
+.load-more{width:100%;padding:10px;background:var(--cream);border:none;
+border-radius:var(--rs);font-size:12px;color:var(--purple);cursor:pointer;
+font-family:'DM Sans',sans-serif;font-weight:500;margin-top:4px}
+.cmt-inp-area{padding:10px 12px;border-top:.5px solid var(--bd);
+flex-shrink:0;background:#fff}
+.cmt-inp-row{display:flex;gap:7px;align-items:flex-end}
+.cmt-ta{flex:1;border:.5px solid var(--bd);border-radius:20px;
+padding:8px 13px;font-size:12px;color:var(--ink);background:var(--cream);
+outline:none;font-family:'DM Sans',sans-serif;resize:none;
+max-height:80px;line-height:1.5}
+.cmt-ta:focus{border-color:var(--purple)}
+.cmt-ta::placeholder{color:var(--ink3)}
+.cmt-send{background:var(--purple);color:#fff;border:none;border-radius:50%;
+width:36px;height:36px;display:flex;align-items:center;
+justify-content:center;cursor:pointer;flex-shrink:0}
+.cmt-send svg{width:15px;height:15px}
+.cmt-info{font-size:10px;color:var(--ink3);margin-top:5px}
+
+/* ── 글쓰기 시트 ── */
+.ws-bg{display:none;position:fixed;inset:0;
+background:rgba(28,26,24,.6);z-index:300;
+align-items:flex-end;justify-content:center}
+.ws-bg.show{display:flex}
+.ws-inner{background:#fff;border-radius:24px 24px 0 0;
+padding:18px 16px 30px;width:100%;max-width:390px}
+.ws-handle{width:36px;height:4px;background:#ddd;
+border-radius:2px;margin:0 auto 14px}
+.ws-head{font-size:14px;font-weight:500;color:var(--ink);
+margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
+.ws-x{font-size:20px;color:var(--ink3);cursor:pointer;
+background:none;border:none;line-height:1}
+.ws-emos{display:flex;gap:5px;margin-bottom:10px;
+overflow-x:auto;padding-bottom:3px}
+.ws-emos::-webkit-scrollbar{display:none}
+.we{padding:5px 11px;border-radius:20px;font-size:11px;font-weight:500;
+cursor:pointer;border:.5px solid var(--bd);color:var(--ink3);
+background:#fff;white-space:nowrap}
+.we.on{background:var(--purple);color:#fff;border-color:var(--purple)}
+.ws-ta{width:100%;min-height:100px;border:.5px solid var(--bd);border-radius:var(--r);
+padding:11px;font-size:13px;font-family:'Gowun Dodum',sans-serif;color:var(--ink);
+background:var(--cream);resize:none;outline:none;line-height:1.7;margin-bottom:8px}
+.ws-ta:focus{border-color:var(--purple)}
+.ws-ta::placeholder{color:var(--ink3)}
+.ws-opts{display:flex;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.ws-opt{display:flex;align-items:center;gap:4px;font-size:11px;
+color:var(--ink3);cursor:pointer}
+.ws-opt input{width:13px;height:13px;accent-color:var(--purple)}
+.ws-safety{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--teal);
+background:var(--tl);border-radius:8px;padding:5px 9px;margin-bottom:10px}
+.ws-safety svg{width:12px;height:12px;flex-shrink:0}
+.ws-btn{width:100%;padding:12px;background:var(--ink);color:#fff;border:none;
+border-radius:var(--r);font-size:13px;font-weight:500;cursor:pointer;
+font-family:'DM Sans',sans-serif}
+
+/* ── 알림 ── */
+.notif-panel{position:fixed;top:0;left:50%;
+transform:translateX(-50%);
+width:100%;max-width:390px;height:100%;background:#fff;
+z-index:300;display:none;flex-direction:column;}
+.notif-panel.show{display:flex}.nd-head{padding:14px 16px;display:flex;align-items:center;
+gap:10px;border-bottom:.5px solid var(--bd);flex-shrink:0}
+.nd-back{width:32px;height:32px;border-radius:50%;background:var(--cream);
+border:none;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.nd-scr{flex:1;overflow-y:auto;padding:10px 14px}
+.ni-item{display:flex;gap:10px;padding:10px 12px;border-radius:var(--r);
+margin-bottom:6px;cursor:pointer;border:.5px solid var(--bd)}
+.ni-item.unread{background:var(--pl);border-color:rgba(107,95,214,.2)}
+.ni-icon{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;
+justify-content:center;font-size:15px;flex-shrink:0}
+.ni-body{flex:1}
+.ni-title{font-size:12px;font-weight:500;color:var(--ink);
+margin-bottom:2px;line-height:1.4}
+.ni-time{font-size:10px;color:var(--ink3)}
+.ni-dot{width:7px;height:7px;border-radius:50%;
+background:var(--purple);flex-shrink:0;margin-top:4px}
+
+/* ── POINTS ── */
+.grade-hero{background:var(--ink);border-radius:22px;
+padding:20px 18px;margin-bottom:12px;position:relative;overflow:hidden}
+.gh-bg{position:absolute;inset:0;
+background:radial-gradient(ellipse at 50% -5%,#3D3580,var(--ink) 65%)}
+.gh-in{position:relative;text-align:center}
+.gh-ew{position:relative;display:inline-block;margin-bottom:8px}
+.gh-e{font-size:42px;display:block}
+.gh-ring{position:absolute;inset:-5px;border-radius:50%;border:1.5px solid;
+animation:rp 2.5s ease-in-out infinite}
+@keyframes rp{0%,100%{opacity:.35;transform:scale(1)}50%{opacity:.9;transform:scale(1.07)}}
+.gh-n{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px}
+.gh-t{font-family:'DM Serif Display',serif;font-size:24px;color:#fff;margin-bottom:2px}
+.gh-d{font-size:10px;color:rgba(255,255,255,.4);margin-bottom:12px}
+.gh-pts{font-size:36px;font-weight:600;color:#fff;line-height:1}
+.gh-unit{font-size:11px;color:rgba(255,255,255,.4);margin-bottom:12px}
+.gh-prog{height:4px;background:rgba(255,255,255,.1);border-radius:2px;
+overflow:hidden;max-width:220px;margin:0 auto 5px}
+.gh-fill{height:100%;border-radius:2px;transition:width .8s}
+.gh-labels{display:flex;justify-content:space-between;font-size:9px;
+color:rgba(255,255,255,.3);max-width:220px;margin:0 auto 10px}
+.gh-next{font-size:10px;color:rgba(255,255,255,.4)}
+.infl-strip{display:flex;padding:12px 14px;border-top:1px solid rgba(255,255,255,.07)}
+.infl-item{flex:1;text-align:center;border-right:.5px solid rgba(255,255,255,.07)}
+.infl-item:last-child{border-right:none}
+.infl-num{font-size:18px;font-weight:600;color:#fff;line-height:1}
+.infl-lbl{font-size:9px;color:rgba(255,255,255,.38);margin-top:2px}
+.tab-strip{display:flex;background:var(--cream);border-radius:var(--r);
+padding:3px;margin-bottom:12px}
+.tb{flex:1;padding:8px;border-radius:13px;font-size:11px;font-weight:500;
+cursor:pointer;text-align:center;color:var(--ink3);border:none;
+background:none;font-family:'DM Sans',sans-serif}
+.tb.on{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.sec-lbl{font-size:10px;font-weight:700;color:var(--ink3);letter-spacing:.06em;
+text-transform:uppercase;margin:12px 0 8px;display:flex;align-items:center;gap:7px}
+.sec-lbl::after{content:'';flex:1;height:.5px;background:var(--bd)}
+.rw-card{border:.5px solid var(--bd);border-radius:16px;padding:12px 14px;
+margin-bottom:7px;background:#fff;display:flex;align-items:center;
+gap:10px;cursor:pointer}
+.rw-icon{font-size:24px;width:38px;height:38px;display:flex;align-items:center;
+justify-content:center;border-radius:11px;flex-shrink:0}
+.rw-info{flex:1}
+.rw-name{font-size:12px;font-weight:500;color:var(--ink);margin-bottom:2px}
+.rw-desc{font-size:10px;color:var(--ink3);line-height:1.4;margin-bottom:4px}
+.rw-tags{display:flex;gap:3px;flex-wrap:wrap}
+.rw-tag{font-size:9px;padding:2px 6px;border-radius:7px;font-weight:500}
+.rw-pt{font-size:11px;font-weight:600;white-space:nowrap;
+align-self:flex-start;margin-top:2px}
+.gr-row{display:flex;align-items:center;gap:9px;border:.5px solid var(--bd);
+border-radius:var(--r);padding:10px 12px;margin-bottom:6px;background:#fff}
+.gr-row.cur{border-width:2px}
+.gr-e{font-size:24px;width:36px;text-align:center;flex-shrink:0}
+.gr-info{flex:1}
+.gr-n{font-size:9px;font-weight:700;letter-spacing:.07em;
+text-transform:uppercase;margin-bottom:2px}
+.gr-t{font-size:13px;font-weight:500;color:var(--ink)}
+.gr-p{font-size:10px;color:var(--ink3);margin-top:1px}
+.gr-perks{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px}
+.gr-perk{font-size:9px;padding:1px 6px;border-radius:7px;
+background:var(--cream);color:var(--ink3);border:.5px solid var(--bd)}
+.cur-badge{font-size:9px;padding:2px 8px;border-radius:10px;
+font-weight:600;white-space:nowrap}
+
+/* ── 팝업 / 토스트 ── */
+.pop-ov{display:none;position:fixed;inset:0;
+background:rgba(0,0,0,.7);align-items:center;justify-content:center;z-index:600}
+.pop-ov.show{display:flex}
+.pop-card{background:#fff;border-radius:28px;padding:30px 26px;
+text-align:center;max-width:285px;width:90%}
+.pop-e{font-size:52px;margin-bottom:12px;display:block}
+.pop-title{font-family:'DM Serif Display',serif;font-size:24px;color:var(--ink);margin-bottom:8px}
+.pop-msg{font-size:12px;color:var(--ink3);line-height:1.7;margin-bottom:14px}
+.pop-badge{display:inline-block;font-size:11px;font-weight:500;
+padding:5px 13px;border-radius:20px;margin-bottom:16px}
+.pop-btn{width:100%;padding:13px;background:var(--ink);color:#fff;border:none;
+border-radius:var(--r);font-size:13px;font-weight:500;cursor:pointer;
+font-family:'DM Sans',sans-serif}
+.toast{position:fixed;bottom:76px;left:50%;
+transform:translateX(-50%) translateY(10px);
+background:var(--ink);color:#fff;font-size:12px;font-weight:500;
+padding:9px 16px;border-radius:20px;opacity:0;transition:all .3s;
+pointer-events:none;white-space:nowrap;z-index:1000;
+max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+/* 글쓰기 영역 */
+.write-zone{margin-bottom:12px;display:none}
+.wz-lbl{font-size:11px;font-weight:600;color:var(--ink3);margin-bottom:6px}
+.story-ta{width:100%;min-height:88px;border:1px solid var(--bd);border-radius:var(--r);
+  padding:11px;font-size:12px;font-family:'Gowun Dodum',sans-serif;
+  color:var(--ink);background:var(--cream);resize:none;outline:none;line-height:1.7}
+.story-ta:focus{border-color:var(--purple)}
+.story-ta::placeholder{color:var(--ink3)}
+.write-opts{display:flex;gap:10px;margin-top:7px;flex-wrap:wrap}
+.opt-c{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--ink3);cursor:pointer}
+.opt-c input{width:13px;height:13px;accent-color:var(--purple)}
+.safety-note{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--teal);
+  background:var(--tl);border-radius:8px;padding:5px 9px;margin-top:7px}
+.safety-note svg{width:12px;height:12px;flex-shrink:0}
+.write-row{display:flex;gap:7px;margin-top:8px}
+.w-btn{flex:1;background:var(--ink);color:#fff;border:none;border-radius:var(--r);
+  padding:11px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif}
+.w-btn.sec{background:var(--cream);color:var(--ink2);border:1px solid var(--bd);
+  flex:0 0 auto;padding:11px 14px}
+/* 오프라인 배너 */
+.offline-bar{display:none;position:fixed;top:0;left:0;right:0;
+  background:#333;color:#fff;font-size:12px;text-align:center;
+  padding:8px;z-index:999;font-family:'DM Sans',sans-serif}
+.offline-bar.show{display:block}
+/* 공유 버튼 */
+.share-btn{display:flex;align-items:center;gap:5px;font-size:11px;
+  color:var(--purple);cursor:pointer;background:none;border:none;
+  font-family:'DM Sans',sans-serif;font-weight:500}
+/* 개인정보/약관 링크 */
+.legal-links{display:flex;gap:12px;justify-content:center;
+  margin-top:12px;padding-top:12px;border-top:.5px solid var(--bd)}
+.legal-link{font-size:10px;color:var(--ink3);cursor:pointer;
+  text-decoration:underline;background:none;border:none;
+  font-family:'DM Sans',sans-serif}
+/* 팝업 — 개인정보/약관 */
+.legal-ov{display:none;position:fixed;inset:0;background:rgba(28,26,24,.65);
+  z-index:700;align-items:flex-end;justify-content:center}
+.legal-ov.show{display:flex}
+.legal-sheet{background:#fff;border-radius:24px 24px 0 0;
+  padding:20px 18px 32px;width:100%;max-width:390px;max-height:80vh;
+  display:flex;flex-direction:column}
+.legal-handle{width:36px;height:4px;background:#ddd;
+  border-radius:2px;margin:0 auto 14px}
+.legal-title{font-size:15px;font-weight:500;color:var(--ink);
+  margin-bottom:12px;text-align:center}
+.legal-body{flex:1;overflow-y:auto;font-size:11px;color:var(--ink2);
+  line-height:1.85;padding-right:4px}
+.legal-body h4{font-size:12px;font-weight:600;color:var(--ink);
+  margin:12px 0 4px}
+.legal-close{width:100%;padding:12px;background:var(--ink);color:#fff;
+  border:none;border-radius:var(--r);font-size:13px;font-weight:500;
+  cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:14px}
+/* 스크롤 부드럽게 */
+.scr{scroll-behavior:smooth}
+/* 첫 방문 환영 */
+.welcome-banner{background:linear-gradient(135deg,var(--purple),#5048c0);
+  border-radius:var(--r);padding:14px 16px;margin-bottom:12px;color:#fff;
+  display:none}
+.welcome-banner.show{display:block}
+</style>
+</head>
+<body>
+<div class="device">
+<div class="offline-bar" id="offlineBar">📡 인터넷 연결이 끊겼어요. 일부 기능이 제한될 수 있어요.</div>
+
+<!-- SPLASH -->
+<div class="pg show" id="pg-splash">
+  <div class="sp-orb">
+    <svg viewBox="0 0 54 54" fill="none">
+      <circle cx="27" cy="27" r="20" fill="rgba(255,255,255,.12)"/>
+      <path d="M27 10v34M10 27h34M15.5 15.5l23 23M38.5 15.5l-23 23"
+        stroke="white" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+      <circle cx="27" cy="27" r="7" fill="white"/>
+    </svg>
+  </div>
+  <div class="sp-name">Lumi</div>
+  <div class="sp-tag">당신 곁의 따뜻한 빛<br>마음을 나누는 커뮤니티</div>
+  <button class="sp-btn" id="startBtn">시작하기</button>
+  <div class="sp-fine">한국 서비스 · 광고 없음 · 익명 보호<br>감정 데이터 절대 판매 안 해요</div>
+</div>
+
+<!-- ONBOARD -->
+<div class="pg" id="pg-onboard">
+  <div class="ob-dots">
+    <div class="ob-dot on" id="dot0"></div>
+    <div class="ob-dot" id="dot1"></div>
+    <div class="ob-dot" id="dot2"></div>
+  </div>
+  <div class="ob-step show" id="ob0">
+    <div class="ob-em">💭</div>
+    <div class="ob-title">지금 마음이 어떤가요?</div>
+    <div class="ob-desc">12가지 감정 중 오늘 내 마음을 골라요. Lumi가 따뜻한 글귀를 바로 보여드려요.</div>
+    <button class="ob-btn" id="ob0Btn">다음</button>
+    <button class="ob-skip" id="ob0Skip">건너뛰기</button>
+  </div>
+  <div class="ob-step" id="ob1">
+    <div class="ob-em">🤝</div>
+    <div class="ob-title">함께하면 덜 힘들어요</div>
+    <div class="ob-desc">사연을 올리면 비슷한 경험의 사람들이 응원해줘요. 베스트 댓글을 채택하면 포인트가 쌓여요.</div>
+    <button class="ob-btn" id="ob1Btn">다음</button>
+    <button class="ob-skip" id="ob1Skip">건너뛰기</button>
+  </div>
+  <div class="ob-step" id="ob2">
+    <div class="ob-em">🌱</div>
+    <div class="ob-title">나눌수록 빛나요</div>
+    <div class="ob-desc">씨앗에서 루미까지 6단계 등급. 포인트로 기프티콘·상담 교환, 이웃에게 기부도 가능해요.</div>
+    <button class="ob-btn" id="ob2Btn">Lumi 시작하기 ✨</button>
+  </div>
+</div>
+
+<!-- HOME -->
+<div class="pg" id="pg-home">
+  <div class="topbar">
+    <span class="logo">Lumi<em>.</em></span>
+    <span class="grade-pill" id="gradePill">🌱 씨앗 · 320pt</span>
+  </div>
+  <div class="scr">
+    <div style="font-size:11px;color:var(--ink3);margin-bottom:3px" id="greetT">좋은 하루예요</div>
+    <div style="font-family:'DM Serif Display',serif;font-size:22px;line-height:1.3;margin-bottom:14px">
+      오늘 마음이<br><em style="color:var(--purple);font-style:italic">어떤가요?</em></div>
+
+    <div class="ez-zone">
+      <div class="ez-zone-bg"></div>
+      <div class="ez">
+        <div class="ez-row">
+          <div class="av-box">
+            <svg id="av" viewBox="0 0 100 100">
+              <circle id="avF" cx="50" cy="50" r="44" fill="#EAE7FF" stroke="#9B91E8" stroke-width="1.5"/>
+              <circle id="avEL" cx="36" cy="42" r="5" fill="#6B5FD6"/>
+              <circle id="avER" cx="64" cy="42" r="5" fill="#6B5FD6"/>
+              <path id="avM" d="M35 62Q50 72 65 62" fill="none" stroke="#6B5FD6" stroke-width="2.5" stroke-linecap="round"/>
+              <ellipse id="avBL" cx="28" cy="55" rx="7" ry="4" fill="#F4C0D1" opacity="0"/>
+              <ellipse id="avBR" cx="72" cy="55" rx="7" ry="4" fill="#F4C0D1" opacity="0"/>
+              <path id="avBrL" d="M30 34Q36 31 42 34" fill="none" stroke="#6B5FD6" stroke-width="1.8" stroke-linecap="round"/>
+              <path id="avBrR" d="M58 34Q64 31 70 34" fill="none" stroke="#6B5FD6" stroke-width="1.8" stroke-linecap="round"/>
+              <line id="avTL" x1="33" y1="48" x2="30" y2="59" stroke="#85B7EB" stroke-width="2" stroke-linecap="round" opacity="0"/>
+              <line id="avTR" x1="67" y1="48" x2="70" y2="59" stroke="#85B7EB" stroke-width="2" stroke-linecap="round" opacity="0"/>
+            </svg>
+          </div>
+          <div>
+            <span class="ez-msg-str" id="ezMsg">지금 어떤 마음인가요?</span>
+            <span class="ez-msg-sub">감정을 고르면 Lumi가 함께해요</span>
+          </div>
+        </div>
+        <div class="emo-grid">
+          <div class="eb" data-e="sad"><span class="ef">(._.)</span>우울해</div>
+          <div class="eb" data-e="anxious"><span class="ef">(o_o)</span>불안해</div>
+          <div class="eb" data-e="lonely"><span class="ef">( . .)</span>외로워</div>
+          <div class="eb" data-e="angry"><span class="ef">(`д`)</span>화가 나</div>
+          <div class="eb" data-e="tired"><span class="ef">(-_-)</span>지쳐</div>
+          <div class="eb" data-e="happy"><span class="ef">(^_^)</span>기분 좋아</div>
+          <div class="eb" data-e="grateful"><span class="ef">(^v^)</span>감사해</div>
+          <div class="eb" data-e="lost"><span class="ef">(?_?)</span>길 잃었어</div>
+          <div class="eb" data-e="betrayed"><span class="ef">(｀_｀)</span>배신감</div>
+          <div class="eb" data-e="empty"><span class="ef">(  .)</span>공허해</div>
+          <div class="eb" data-e="hopeful"><span class="ef">(^^*)</span>희망차</div>
+          <div class="eb" data-e="nervous"><span class="ef">(^^;)</span>긴장돼</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ai-card" id="aiCard">
+      <div class="ai-head">
+        <div class="ai-lbl"><div class="ai-lbl-dot"></div>Lumi의 한마디</div>
+        <span id="aiEtag"></span>
+      </div>
+      <div id="aiBody"></div>
+      <div class="ai-btns" id="aiBtns">
+        <div class="ai-btn" id="refreshBtn">↻ 다른 글귀</div>
+        <div class="ai-btn pri" id="moreWordsBtn">글귀 더 보기 →</div>
+      </div>
+    </div>
+
+    <!-- 홈 글쓰기 -->
+    <div class="write-zone" id="writeZone">
+      <div class="wz-lbl">✍️ 마음을 기록해봐요</div>
+      <textarea class="story-ta" id="storyTa"
+        placeholder="오늘 어떤 일이 있었나요?&#10;&#10;커뮤니티에 올리면 Lumi AI 조언 + 응원이 달려요."></textarea>
+      <div class="write-opts">
+        <label class="opt-c"><input type="checkbox" id="anonChk" checked> 익명으로 올리기</label>
+        <label class="opt-c" style="color:var(--coral)"><input type="checkbox" id="urgentChk"> 🆘 긴급도움</label>
+      </div>
+      <div class="safety-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        AI 안전 검사 후 게시 · 개인정보 자동 보호
+      </div>
+      <div class="write-row">
+        <button class="w-btn sec" id="writeCancelBtn">취소</button>
+        <button class="w-btn" id="writeSubmitBtn">🛡️ 커뮤니티에 올리기</button>
+      </div>
+    </div>
+
+    <div class="home-grid">
+      <div class="infl-box">
+        <div class="infl-lbl">📊 내 영향력</div>
+        <div class="infl-row"><span>댓글 읽힘</span><b>47</b></div>
+        <div class="infl-row"><span>좋아요</span><b>23</b></div>
+        <div class="infl-row"><span>베스트 채택</span><b>2</b></div>
+        <div class="infl-row"><span>기부 pt</span><b id="homeDonate">0</b></div>
+      </div>
+      <div class="gmc" id="gmcBtn">
+        <div class="gmc-bg"></div>
+        <div class="gmc-i">
+          <div style="font-size:24px;margin-bottom:4px" id="gmcE">🌱</div>
+          <div style="font-size:9px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:1px;color:var(--green)" id="gmcN">씨앗 등급</div>
+          <div style="font-family:'DM Serif Display',serif;font-size:14px;color:#fff" id="gmcT">작은 씨앗</div>
+          <div style="font-size:9px;color:rgba(255,255,255,.4);margin-top:2px" id="gmcP">320 pt</div>
+          <div style="height:3px;background:rgba(255,255,255,.1);border-radius:2px;margin-top:6px;overflow:hidden">
+            <div id="gmcF" style="height:100%;border-radius:2px;width:32%;background:var(--green)"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dp-prev" id="dpPrev">
+      <div style="font-size:9px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;margin-bottom:7px;color:var(--coral)" id="dpCat">오늘의 위로</div>
+      <div style="font-family:'DM Serif Display',serif;font-size:13px;line-height:1.65;font-style:italic;color:var(--ink);margin-bottom:4px" id="dpText">"이 또한 지나가리라."</div>
+      <div style="font-size:10px;color:var(--ink3)" id="dpSrc">— 페르시아 격언 · 글귀 탭에서 더 보기 →</div>
+    </div>
+    <div style="height:14px"></div>
+  </div>
+  <div class="nav">
+    <div class="ni on" data-tab="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>홈</div>
+    <div class="ni" data-tab="words"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>글귀</div>
+    <div class="ni" data-tab="community"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>커뮤니티</div>
+    <div class="ni" data-tab="points"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>등급</div>
+  </div>
+</div>
+
+<!-- WORDS -->
+<div class="pg" id="pg-words">
+  <div class="topbar">
+    <span class="logo">Lumi<em>.</em></span>
+    <span style="font-size:13px;font-weight:500;color:var(--ink2)">오늘의 글귀</span>
+  </div>
+  <div class="scr">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+      <div style="font-size:12px;font-weight:600;color:var(--ink)">Lumi가 오늘 골라드린 글귀</div>
+      <button id="dailyRefBtn" style="font-size:11px;color:var(--purple);cursor:pointer;display:flex;align-items:center;gap:3px;font-weight:500;background:none;border:none;font-family:'DM Sans',sans-serif">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>새로 고르기</button>
+    </div>
+    <div id="dailyCards"></div>
+    <button class="more-btn" id="moreBtn">
+      <svg id="moreIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13" style="transition:transform .3s"><polyline points="6 9 12 15 18 9"/></svg>
+      카테고리별로 더 보기
+    </button>
+    <div class="cat-explore" id="catExplore"></div>
+    <div style="height:12px"></div>
+  </div>
+  <div class="nav">
+    <div class="ni" data-tab="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>홈</div>
+    <div class="ni on" data-tab="words"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>글귀</div>
+    <div class="ni" data-tab="community"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>커뮤니티</div>
+    <div class="ni" data-tab="points"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>등급</div>
+  </div>
+</div>
+
+<!-- COMMUNITY -->
+<div class="pg" id="pg-community">
+  <div class="topbar">
+    <span class="logo">Lumi<em>.</em></span>
+    <div style="display:flex;align-items:center;gap:8px">
+      <button id="shareAppBtn" style="background:none;border:none;cursor:pointer;font-size:13px;color:var(--purple)" title="공유하기">🔗</button>
+      <div id="notifBtn" style="width:30px;height:30px;border-radius:50%;border:.5px solid var(--bd);background:var(--cream);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;font-size:14px">
+      🔔<div id="notifDot" style="position:absolute;top:3px;right:3px;width:7px;height:7px;border-radius:50%;background:var(--coral);border:1.5px solid #fff"></div>
+    </div>
+  </div>
+  <div class="feed-tabs" id="feedTabs">
+    <div class="ft on" data-feed="latest">최신</div>
+    <div class="ft" data-feed="best">🏆 베스트</div>
+    <div class="ft" data-feed="urgent">🆘 긴급도움</div>
+    <div class="ft" data-feed="mine">내 사연</div>
+  </div>
+  <div class="feed-scr" id="feedScr">
+    <div class="best-banner" id="bestBanner">
+      <div class="bb-glow"></div>
+      <div class="bb-in">
+        <div class="bb-badge">🏆 오늘의 베스트 사연</div>
+        <div class="bb-title">"회사에서 혼자만 빠진 회식이 있었어요. 집에 오는 길에 너무 쓸쓸했어요."</div>
+        <div class="bb-meta"><span>달빛여행자 · ☀️ 햇살</span>
+          <div class="bb-stats"><span>❤️ 1,247</span><span>💬 1,089</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="test-box">
+      <h4>🧪 안전 시스템 테스트</h4>
+      <div class="test-item" data-test="0">📋 위기 표현 → "죽고 싶어요"</div>
+      <div class="test-item" data-test="1">📋 비교·무시 → "그것도 힘들다고요?"</div>
+      <div class="test-item" data-test="2">📋 개인정보 → 전화번호 포함</div>
+      <div class="test-item" data-test="3">📋 정상 댓글 → 통과 확인</div>
+    </div>
+    <div id="feedList"></div>
+    <div style="height:70px"></div>
+  </div>
+  <button class="fab" id="fabBtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+  </button>
+  <div class="nav">
+    <div class="ni" data-tab="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>홈</div>
+    <div class="ni" data-tab="words"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>글귀</div>
+    <div class="ni on" data-tab="community"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>커뮤니티</div>
+    <div class="ni" data-tab="points"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>등급</div>
+  </div>
+</div>
+
+<!-- POINTS -->
+<div class="pg" id="pg-points">
+  <div class="topbar">
+    <span class="logo">Lumi<em>.</em></span>
+    <span style="font-size:13px;font-weight:500;color:var(--ink2)">등급 & 리워드</span>
+  </div>
+  <div class="scr">
+    <div class="grade-hero">
+      <div class="gh-bg"></div>
+      <div class="gh-in">
+        <div class="gh-ew"><div class="gh-e" id="ghE">🌱</div>
+          <div class="gh-ring" id="ghRing" style="border-color:var(--green)"></div></div>
+        <div class="gh-n" id="ghN" style="color:var(--green)">씨앗 등급</div>
+        <div class="gh-t" id="ghT">작은 씨앗</div>
+        <div class="gh-d" id="ghD">따뜻한 커뮤니티의 첫 걸음</div>
+        <div class="gh-pts" id="ghPts">320</div>
+        <div class="gh-unit">포인트</div>
+        <div class="gh-prog"><div class="gh-fill" id="ghFill" style="width:32%;background:var(--green)"></div></div>
+        <div class="gh-labels"><span id="ghFrom">0pt</span><span id="ghTo">500pt</span></div>
+        <div class="gh-next" id="ghNext">🌿 새싹까지 180pt 남았어요</div>
+      </div>
+      <div class="infl-strip">
+        <div class="infl-item"><div class="infl-num">47</div><div class="infl-lbl">댓글 읽힘</div></div>
+        <div class="infl-item"><div class="infl-num">23</div><div class="infl-lbl">좋아요</div></div>
+        <div class="infl-item"><div class="infl-num">2</div><div class="infl-lbl">베스트</div></div>
+        <div class="infl-item"><div class="infl-num" id="inflDonate">0</div><div class="infl-lbl">기부pt</div></div>
+      </div>
+    </div>
+    <div class="tab-strip" id="ptabStrip">
+      <button class="tb on" data-ptab="reward">리워드</button>
+      <button class="tb" data-ptab="give">나눔·선물</button>
+      <button class="tb" data-ptab="ladder">등급 로드맵</button>
+      <button class="tb" data-ptab="history">내역</button>
+    </div>
+    <div id="ptc-reward">
+      <div class="sec-lbl">감정 보상 (무료)</div>
+      <div class="rw-card" data-rw="influence"><div class="rw-icon" style="background:var(--pl)">📊</div><div class="rw-info"><div class="rw-name">월간 영향력 리포트</div><div class="rw-desc">내 말이 몇 명에게 닿았는지 분석</div><div class="rw-tags"><span class="rw-tag" style="background:var(--pl);color:var(--purple)">씨앗 이상</span><span class="rw-tag" style="background:var(--cream);color:var(--ink3)">무료</span></div></div><div class="rw-pt" style="color:var(--purple)">받기</div></div>
+      <div class="rw-card" data-rw="badge"><div class="rw-icon" style="background:var(--al)">🌟</div><div class="rw-info"><div class="rw-name">따뜻한 사람 배지</div><div class="rw-desc">프로필 영구 표시 인증 배지</div><div class="rw-tags"><span class="rw-tag" style="background:var(--al);color:var(--amber)">200pt</span></div></div><div class="rw-pt" style="color:var(--amber)">200pt</div></div>
+      <div class="sec-lbl">포인트 교환</div>
+      <div class="rw-card" data-rw="coffee"><div class="rw-icon" style="background:var(--al)">☕</div><div class="rw-info"><div class="rw-name">커피 기프티콘</div><div class="rw-desc">카카오톡 즉시 발송</div><div class="rw-tags"><span class="rw-tag" style="background:var(--al);color:var(--amber)">500pt</span></div></div><div class="rw-pt" style="color:var(--amber)">500pt</div></div>
+      <div class="rw-card" data-rw="book"><div class="rw-icon" style="background:var(--pl)">📚</div><div class="rw-info"><div class="rw-name">감정 치유 eBook</div><div class="rw-desc">Lumi 추천 심리 PDF</div><div class="rw-tags"><span class="rw-tag" style="background:var(--pl);color:var(--purple)">300pt</span></div></div><div class="rw-pt" style="color:var(--purple)">300pt</div></div>
+      <div class="rw-card" data-rw="counsel"><div class="rw-icon" style="background:var(--tl)">🎙️</div><div class="rw-info"><div class="rw-name">심리상담 30분</div><div class="rw-desc">제휴 플랫폼 쿠폰 · 별빛 이상</div><div class="rw-tags"><span class="rw-tag" style="background:var(--tl);color:var(--teal)">1,000pt</span><span class="rw-tag" style="background:var(--pl);color:var(--purple)">별빛 이상</span></div></div><div class="rw-pt" style="color:var(--teal)">1,000pt</div></div>
+      <div class="rw-card" data-rw="hall"><div class="rw-icon" style="background:var(--al)">🏆</div><div class="rw-info"><div class="rw-name">명예의 전당 영구 등재</div><div class="rw-desc">달빛 이상 · 앱 내 영원히 기록</div><div class="rw-tags"><span class="rw-tag" style="background:var(--al);color:var(--amber)">3,000pt</span><span class="rw-tag" style="background:var(--pkl);color:var(--pink)">달빛 이상</span></div></div><div class="rw-pt" style="color:var(--amber)">3,000pt</div></div>
+    </div>
+    <div id="ptc-give" style="display:none">
+      <div style="border-radius:16px;padding:14px;margin-bottom:8px;border:.5px solid rgba(45,158,130,.4);background:var(--tl)">
+        <div style="font-size:13px;font-weight:500;color:var(--ink);margin-bottom:5px">💛 포인트로 세상을 따뜻하게</div>
+        <div style="font-size:11px;color:var(--ink2);line-height:1.65;margin-bottom:9px">100pt=취약계층 1일 급식 · 300pt=소외아동 책 지원</div>
+        <div style="display:flex;gap:6px">
+          <input id="donateAmt" type="number" placeholder="기부할 포인트" min="100" step="100"
+            style="flex:1;border:1px solid rgba(45,158,130,.4);border-radius:var(--rs);padding:9px 11px;font-size:12px;color:var(--ink);background:#fff;outline:none;font-family:'DM Sans',sans-serif">
+          <button id="donateBtn" style="padding:9px 14px;background:var(--teal);color:#fff;border:none;border-radius:var(--rs);font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif">기부하기</button>
+        </div>
+      </div>
+      <div style="border-radius:16px;padding:14px;margin-bottom:8px;border:.5px solid rgba(107,95,214,.3);background:var(--pl)">
+        <div style="font-size:13px;font-weight:500;color:var(--ink);margin-bottom:5px">🎁 포인트 선물하기</div>
+        <div style="font-size:11px;color:var(--ink2);line-height:1.65;margin-bottom:8px">마음에 든 댓글 작성자에게 100pt씩 선물할 수 있어요.</div>
+        <div style="display:flex;gap:6px">
+          <input id="giftNick" placeholder="닉네임 입력"
+            style="flex:1;border:1px solid rgba(107,95,214,.3);border-radius:var(--rs);padding:9px 11px;font-size:12px;color:var(--ink);background:#fff;outline:none;font-family:'DM Sans',sans-serif">
+          <button id="giftBtn" style="padding:9px 14px;background:var(--purple);color:#fff;border:none;border-radius:var(--rs);font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif">선물 보내기</button>
+        </div>
+      </div>
+    </div>
+    <div id="ptc-ladder" style="display:none"><div id="gradeLadder"></div></div>
+    <div id="ptc-history" style="display:none">
+      <div style="display:flex;align-items:center;gap:9px;padding:9px 11px;background:var(--cream);border-radius:var(--rs);margin-bottom:5px"><div style="font-size:15px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:9px;background:var(--tl)">🏆</div><div style="flex:1"><div style="font-size:12px;font-weight:500;color:var(--ink)">베스트 댓글 채택 ×2</div><div style="font-size:10px;color:var(--ink3)">오늘</div></div><div style="font-size:12px;font-weight:600;color:var(--teal)">+100pt</div></div>
+      <div style="display:flex;align-items:center;gap:9px;padding:9px 11px;background:var(--cream);border-radius:var(--rs);margin-bottom:5px"><div style="font-size:15px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:9px;background:var(--pl)">❤️</div><div style="flex:1"><div style="font-size:12px;font-weight:500;color:var(--ink)">댓글 좋아요 40개</div><div style="font-size:10px;color:var(--ink3)">이번 주</div></div><div style="font-size:12px;font-weight:600;color:var(--teal)">+80pt</div></div>
+      <div style="display:flex;align-items:center;gap:9px;padding:9px 11px;background:var(--cream);border-radius:var(--rs);margin-bottom:5px"><div style="font-size:15px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:9px;background:var(--al)">📅</div><div style="flex:1"><div style="font-size:12px;font-weight:500;color:var(--ink)">출석 체크 8일</div><div style="font-size:10px;color:var(--ink3)">이번 달</div></div><div style="font-size:12px;font-weight:600;color:var(--teal)">+80pt</div></div>
+    </div>
+    <!-- 법적 링크 -->
+    <div class="legal-links">
+      <button class="legal-link" id="privacyBtn">개인정보처리방침</button>
+      <button class="legal-link" id="termsBtn">이용약관</button>
+      <button class="legal-link" id="contactBtn">문의하기</button>
+    </div>
+    <div style="height:20px"></div>
+  </div>
+  <div class="nav">
+    <div class="ni" data-tab="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>홈</div>
+    <div class="ni" data-tab="words"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>글귀</div>
+    <div class="ni" data-tab="community"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>커뮤니티</div>
+    <div class="ni on" data-tab="points"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>등급</div>
+  </div>
+</div>
+
+<!-- 서랍 -->
+<div class="drw-bg" id="drwBg"></div>
+<div class="drw" id="drw">
+  <div class="drw-handle"></div>
+  <div class="drw-head">
+    <div><div class="drw-title" id="drwTitle">댓글</div>
+      <div style="font-size:10px;color:var(--ink3);margin-top:1px" id="drwLimit"></div></div>
+    <button class="drw-close" id="drwClose">×</button>
+  </div>
+  <div class="drw-story" id="drwStory"></div>
+  <div class="cf-strip" id="cfStrip">
+    <div class="cf on" data-cf="all">전체</div>
+    <div class="cf" data-cf="best">🏆 베스트만</div>
+    <div class="cf" data-cf="recent">최신순</div>
+    <div class="cf" data-cf="empathy">공감순</div>
+  </div>
+  <div class="cmt-list" id="cmtList"></div>
+  <div class="cmt-inp-area">
+    <div class="cmt-inp-row">
+      <textarea class="cmt-ta" id="cmtTa" placeholder="따뜻한 응원 한마디... (+5pt)" rows="1"
+        oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,80)+'px'"></textarea>
+      <button class="cmt-send" id="cmtSend">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
+    <div class="cmt-info" id="cmtInfo">오늘 남은 댓글: 20개 · AI 안전 검사 후 게시</div>
+  </div>
+</div>
+
+<!-- 알림 -->
+<div class="notif-panel" id="notifPanel">
+  <div class="nd-head">
+    <button class="nd-back" id="ndBack">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div style="font-size:15px;font-weight:500;color:var(--ink);flex:1">알림</div>
+    <button id="ndReadAll" style="font-size:11px;color:var(--purple);background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif">모두 읽음</button>
+  </div>
+  <div class="nd-scr" id="ndScr"></div>
+</div>
+
+<!-- 글쓰기 시트 -->
+<div class="ws-bg" id="wsBg">
+  <div class="ws-inner">
+    <div class="ws-handle"></div>
+    <div class="ws-head">마음을 나눠요
+      <button class="ws-x" id="wsX">×</button>
+    </div>
+    <div class="ws-emos" id="wsEmos">
+      <div class="we" data-we="우울해">우울해</div>
+      <div class="we" data-we="불안해">불안해</div>
+      <div class="we" data-we="외로워">외로워</div>
+      <div class="we" data-we="화가 나">화가 나</div>
+      <div class="we" data-we="지쳐">지쳐</div>
+      <div class="we" data-we="기분 좋아">기분 좋아</div>
+      <div class="we" data-we="감사해">감사해</div>
+      <div class="we" data-we="길 잃었어">길 잃었어</div>
+    </div>
+    <textarea class="ws-ta" id="wsTa" placeholder="오늘 어떤 일이 있었나요? 판단 없이 함께 들을게요."></textarea>
+    <div class="ws-opts">
+      <label class="ws-opt"><input type="checkbox" id="wsAnon" checked> 익명으로 올리기</label>
+      <label class="ws-opt" style="color:var(--coral)"><input type="checkbox" id="wsUrgent"> 🆘 긴급도움 요청</label>
+    </div>
+    <div class="ws-safety">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      AI 안전 검사 후 게시 · 개인정보 자동 보호
+    </div>
+    <button class="ws-btn" id="wsSubmit">🛡️ 안전 검사 후 올리기</button>
+  </div>
+</div>
+
+<!-- 팝업 -->
+<div class="pop-ov" id="gradeOv">
+  <div class="pop-card">
+    <span class="pop-e" id="popE">🌿</span>
+    <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:5px">등급 상승!</div>
+    <div class="pop-title" id="popT">새싹</div>
+    <div class="pop-msg" id="popM"></div>
+    <span class="pop-badge" id="popB"></span>
+    <button class="pop-btn" id="gradeClose">계속할게요 🌱</button>
+  </div>
+</div>
+<div class="pop-ov" id="thanksOv">
+  <div class="pop-card">
+    <span class="pop-e" id="thE">💌</span>
+    <div class="pop-title" id="thT">감사해요</div>
+    <div class="pop-msg" id="thM"></div>
+    <span class="pop-badge" id="thB"></span>
+    <button class="pop-btn" id="thanksClose">확인</button>
+  </div>
+</div>
+<!-- 개인정보처리방침 팝업 -->
+<div class="legal-ov" id="privacyOv">
+  <div class="legal-sheet">
+    <div class="legal-handle"></div>
+    <div class="legal-title">개인정보처리방침</div>
+    <div class="legal-body">
+      <h4>1. 수집하는 개인정보</h4>
+      Lumi는 서비스 제공을 위해 최소한의 정보만 수집해요. 익명 사용자 식별값, 감정 선택 기록, 작성한 사연 및 댓글을 수집해요.
+
+      <h4>2. 개인정보 이용 목적</h4>
+      수집한 정보는 서비스 제공, AI 맞춤 조언 생성, 커뮤니티 안전 관리에만 사용해요. 제3자에게 절대 판매하지 않아요.
+
+      <h4>3. 개인정보 보유 기간</h4>
+      회원 탈퇴 시 즉시 삭제해요. 법적 의무 보존 기간이 있는 경우 그 기간 동안만 보관해요.
+
+      <h4>4. 개인정보 보호 조치</h4>
+      모든 데이터는 암호화하여 저장하고, 개인을 특정할 수 있는 정보(전화번호, 주민번호 등)는 AI가 자동으로 마스킹 처리해요.
+
+      <h4>5. 이용자 권리</h4>
+      언제든지 작성한 글을 삭제하거나 계정을 탈퇴할 수 있어요. 문의: lumi.app.help@gmail.com
+
+      <h4>6. 문의처</h4>
+      개인정보 관련 문의는 앱 내 이메일로 연락해주세요.
+    </div>
+    <button class="legal-close" id="privacyClose">확인했어요</button>
+  </div>
+</div>
+
+<!-- 이용약관 팝업 -->
+<div class="legal-ov" id="termsOv">
+  <div class="legal-sheet">
+    <div class="legal-handle"></div>
+    <div class="legal-title">이용약관</div>
+    <div class="legal-body">
+      <h4>1. 서비스 목적</h4>
+      Lumi는 정신건강 증진과 감정 공유를 위한 커뮤니티 서비스예요. 전문적인 의료 서비스를 대체하지 않아요.
+
+      <h4>2. 이용 자격</h4>
+      만 14세 이상이면 누구나 이용할 수 있어요.
+
+      <h4>3. 금지 행위</h4>
+      타인을 비방하거나 차별하는 내용, 개인정보 공유, 광고성 콘텐츠, 허위 정보 작성은 금지해요. 위반 시 이용이 제한될 수 있어요.
+
+      <h4>4. 콘텐츠 책임</h4>
+      작성자가 게시한 내용의 책임은 작성자에게 있어요. Lumi는 커뮤니티 가이드에 맞지 않는 콘텐츠를 사전 통보 없이 삭제할 수 있어요.
+
+      <h4>5. 긴급 상황</h4>
+      위기 상황 감지 시 1393(자살예방상담전화)으로 연결해드려요. Lumi는 응급 의료 서비스가 아니에요.
+
+      <h4>6. 서비스 변경</h4>
+      서비스 내용은 사전 공지 후 변경될 수 있어요.
+    </div>
+    <button class="legal-close" id="termsClose">확인했어요</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+</div><!-- /device -->
+<script>
+// ═══════════════════════════════
+// 데이터 (var 사용 — 호이스팅 안전)
+// ═══════════════════════════════
+var GRADES=[
+  {e:'🌱',n:'씨앗',t:'작은 씨앗',d:'따뜻한 커뮤니티의 첫 걸음',min:0,max:500,c:'var(--green)',perks:['기본 감정 선택','AI 조언','커뮤니티 댓글']},
+  {e:'🌿',n:'새싹',t:'돋아난 새싹',d:'꾸준히 나누는 마음이 싹을 틔웠어요',min:500,max:1500,c:'var(--teal)',perks:['AI 조언 무제한','커피 기프티콘','새싹 배지']},
+  {e:'☀️',n:'햇살',t:'따뜻한 햇살',d:'당신의 온기가 주변을 밝히고 있어요',min:1500,max:3500,c:'var(--amber)',perks:['감정 일기 분석','월간 리포트','햇살 아바타']},
+  {e:'🌟',n:'별빛',t:'빛나는 별빛',d:'많은 사람에게 빛이 되어주고 있어요',min:3500,max:7000,c:'var(--purple)',perks:['전문가 상담 교환','별빛 인증 배지','우선 알림']},
+  {e:'🌙',n:'달빛',t:'은은한 달빛',d:'어둠 속 가장 필요한 빛이 되었어요',min:7000,max:15000,c:'var(--pink)',perks:['명예의 전당','달빛 채널','멘토 자격']},
+  {e:'✨',n:'루미',t:'루미의 빛',d:'Lumi 그 자체가 된 당신, 감사해요',min:15000,max:99999,c:'var(--coral)',perks:['모든 혜택','운영진 협력','특별 선물']}
+];
+var CATS={
+  sage:{n:'성인·철학자',c:'var(--purple)',b:'var(--pl)'},
+  book:{n:'책 속 글귀',c:'var(--amber)',b:'var(--al)'},
+  poet:{n:'시·문학',c:'var(--pink)',b:'var(--pkl)'},
+  religion:{n:'성경·불경',c:'var(--teal)',b:'var(--tl)'},
+  proverb:{n:'속담·격언',c:'var(--green)',b:'var(--gl)'},
+  modern:{n:'오늘의 위로',c:'var(--coral)',b:'var(--cl)'}
+};
+var WORDS=[
+  {cat:'sage',text:'고통은 피할 수 없지만, 괴로움은 선택이다.',src:'붓다',detail:'법구경'},
+  {cat:'sage',text:'가장 어두운 밤도 끝나고, 태양은 반드시 떠오른다.',src:'빅토르 위고',detail:'레미제라블'},
+  {cat:'sage',text:'당신이 할 수 있다고 믿든 할 수 없다고 믿든, 당신이 옳다.',src:'헨리 포드',detail:''},
+  {cat:'sage',text:'분노하는 것은 독을 마시고 상대방이 죽기를 기다리는 것과 같다.',src:'붓다',detail:''},
+  {cat:'sage',text:'너 자신을 알라. 그것이 모든 지혜의 시작이다.',src:'소크라테스',detail:''},
+  {cat:'sage',text:'성공은 최종이 아니고, 실패는 치명적이지 않다. 계속하는 용기가 중요하다.',src:'윈스턴 처칠',detail:''},
+  {cat:'sage',text:'인생은 자전거 타기와 같다. 균형을 잡으려면 계속 움직여야 한다.',src:'아인슈타인',detail:''},
+  {cat:'book',text:'중요한 건 눈에 보이지 않아. 마음으로만 볼 수 있어.',src:'생텍쥐페리',detail:'어린 왕자'},
+  {cat:'book',text:'폭풍이 지나고 나면 당신은 분명 살아남아 있다.',src:'무라카미 하루키',detail:'해변의 카프카'},
+  {cat:'book',text:'슬픔이란 사랑이 갈 곳을 잃어버린 것이다.',src:'파울로 코엘료',detail:'연금술사'},
+  {cat:'book',text:'사람들은 당신이 느끼게 해준 감정은 절대 잊지 않는다.',src:'마야 안젤루',detail:''},
+  {cat:'book',text:'당신이 진정으로 원한다면, 온 우주가 당신을 도와줄 것이다.',src:'파울로 코엘료',detail:'연금술사'},
+  {cat:'book',text:'행복은 완성된 것이 아니라 여정에 있다.',src:'톨스토이',detail:'안나 카레니나'},
+  {cat:'poet',text:'죽는 날까지 하늘을 우러러 한 점 부끄럼이 없기를.',src:'윤동주',detail:'서시'},
+  {cat:'poet',text:'내가 그의 이름을 불러주기 전에는 그는 다만 하나의 몸짓이었다.',src:'김춘수',detail:'꽃'},
+  {cat:'poet',text:'두 길이 숲속에서 갈라졌다. 나는 덜 걷는 길을 택했고, 그것이 모든 것을 바꾸었다.',src:'로버트 프로스트',detail:'가지 않은 길'},
+  {cat:'poet',text:'봄은 반드시 온다. 그것을 기억하라.',src:'박목월',detail:'나그네'},
+  {cat:'poet',text:'별을 보며 살자. 진흙 속에서도 별을 보며 살자.',src:'윤동주',detail:'별 헤는 밤'},
+  {cat:'religion',text:'주는 나의 목자시니 내게 부족함이 없으리로다.',src:'시편 23:1',detail:'성경'},
+  {cat:'religion',text:'너희 마음에 평안을 주노니, 내가 주는 것은 세상과 같지 않다.',src:'요한복음 14:27',detail:'성경'},
+  {cat:'religion',text:'두려워하지 말라, 내가 너와 함께 함이라.',src:'이사야 41:10',detail:'성경'},
+  {cat:'religion',text:'모든 것이 합력하여 선을 이루느니라.',src:'로마서 8:28',detail:'성경'},
+  {cat:'religion',text:'범사에 감사하라. 이것이 하나님의 뜻이니라.',src:'데살로니가전서 5:18',detail:'성경'},
+  {cat:'religion',text:'고요하라, 내가 하나님 됨을 알지어다.',src:'시편 46:10',detail:'성경'},
+  {cat:'religion',text:'모든 것은 변한다. 변화를 받아들일 때 고통이 사라진다.',src:'붓다',detail:''},
+  {cat:'proverb',text:'이 또한 지나가리라.',src:'페르시아 격언',detail:''},
+  {cat:'proverb',text:'비가 온 뒤에 땅이 굳는다.',src:'한국 속담',detail:''},
+  {cat:'proverb',text:'천 리 길도 한 걸음부터.',src:'한국 속담',detail:''},
+  {cat:'proverb',text:'가장 어두운 시간은 새벽 직전이다.',src:'영국 속담',detail:''},
+  {cat:'proverb',text:'호랑이에게 물려가도 정신만 차리면 산다.',src:'한국 속담',detail:''},
+  {cat:'proverb',text:'고생 끝에 낙이 온다.',src:'한국 속담',detail:''},
+  {cat:'proverb',text:'넘어지는 것이 실패가 아니라, 넘어진 채로 있는 것이 실패다.',src:'중국 속담',detail:''},
+  {cat:'modern',text:'당신은 쉬어도 된다. 무너지는 게 아니라 충전하는 거야.',src:'작자 미상',detail:''},
+  {cat:'modern',text:'완벽하지 않아도 괜찮아. 오늘 하루를 살아낸 것만으로 충분해.',src:'작자 미상',detail:''},
+  {cat:'modern',text:'혼자라고 느낄 때, 지금 이 세상 어딘가에 똑같은 마음인 사람이 있어.',src:'작자 미상',detail:''},
+  {cat:'modern',text:'지금 이 고통은 나를 부수는 게 아니라, 나를 만들어가고 있어.',src:'작자 미상',detail:''},
+  {cat:'modern',text:'오늘 하루도 버텨준 당신, 정말 잘했어요.',src:'작자 미상',detail:''},
+  {cat:'modern',text:'당신의 감정은 틀리지 않았어요. 느끼는 것 자체가 인간이라는 증거예요.',src:'작자 미상',detail:''},
+  {cat:'modern',text:'도움을 요청하는 것은 약함이 아니라 용기야.',src:'작자 미상',detail:''},
+  {cat:'modern',text:'오늘의 나는 어제의 나보다 조금 더 강해졌어.',src:'작자 미상',detail:''}
+];
+var LOCAL={
+  sad:{cat:'proverb',text:'이 또한 지나가리라.',src:'페르시아 격언',advice:'그 슬픔은 당신이 깊이 느낀다는 증거예요. 지금 이 감정을 그대로 느껴도 괜찮아요.'},
+  anxious:{cat:'religion',text:'주는 나의 목자시니 내게 부족함이 없으리로다.',src:'시편 23:1 · 성경',advice:'불안은 앞으로 나아가고 있다는 신호예요. 지금 이 순간에 집중해봐요.'},
+  lonely:{cat:'book',text:'중요한 건 눈에 보이지 않아. 마음으로만 볼 수 있어.',src:'생텍쥐페리 · 어린 왕자',advice:'혼자라는 느낌, 충분히 알아요. 지금 여기 함께 있어요.'},
+  angry:{cat:'sage',text:'분노하는 것은 독을 마시고 상대방이 죽기를 기다리는 것과 같다.',src:'붓다',advice:'화가 나는 건 당연해요. 잠깐 깊게 숨을 한 번 쉬어봐요.'},
+  tired:{cat:'modern',text:'당신은 쉬어도 된다. 무너지는 게 아니라 충전하는 거야.',src:'작자 미상',advice:'지쳤을 때는 멈춰도 괜찮아요. 오늘 충분히 수고했어요.'},
+  happy:{cat:'book',text:'당신이 진정으로 원한다면, 온 우주가 당신을 도와줄 것이다.',src:'파울로 코엘료 · 연금술사',advice:'기쁜 마음이 느껴져요! 이 에너지를 오늘 하루 담아두세요.'},
+  grateful:{cat:'religion',text:'범사에 감사하라. 이것이 하나님의 뜻이니라.',src:'데살로니가전서 5:18 · 성경',advice:'감사한 마음이 당신을 빛나게 해요. 그 마음을 주변에 나눠봐요.'},
+  lost:{cat:'poet',text:'두 길이 숲속에서 갈라졌다. 나는 덜 걷는 길을 택했고, 그것이 모든 것을 바꾸었다.',src:'로버트 프로스트 · 가지 않은 길',advice:'방향을 잃은 것 같을 때가 새로운 길을 여는 순간이에요.'},
+  betrayed:{cat:'modern',text:'당신의 감정은 틀리지 않았어요. 느끼는 것 자체가 인간이라는 증거예요.',src:'작자 미상',advice:'배신은 그 사람의 문제예요. 당신의 가치는 변하지 않아요.'},
+  empty:{cat:'proverb',text:'이 또한 지나가리라.',src:'페르시아 격언',advice:'텅 빈 느낌은 무언가 채워질 공간이 생겼다는 뜻일 수도 있어요.'},
+  hopeful:{cat:'sage',text:'가장 어두운 밤도 끝나고, 태양은 반드시 떠오른다.',src:'빅토르 위고 · 레미제라블',advice:'그 희망을 꼭 붙잡아요. 희망은 씨앗이 되어 반드시 꽃을 피워요.'},
+  nervous:{cat:'religion',text:'두려워하지 말라, 내가 너와 함께 함이라.',src:'이사야 41:10 · 성경',advice:'긴장은 중요하다는 증거예요. 당신은 이미 충분히 준비되어 있어요.'}
+};
+var EMSG={sad:'괜찮아요.',anxious:'잠깐 같이 숨 쉬어볼까요?',lonely:'지금 당신 곁에 있을게요.',angry:'그 마음 충분히 이해해요.',tired:'오늘 정말 수고했어요.',happy:'이 에너지를 나눠봐요!',grateful:'그 마음이 당신을 빛나게 해요.',lost:'잠시 멈춰 있어도 괜찮아요.',betrayed:'당신 잘못이 아니에요.',empty:'빈 곳은 채워질 공간이에요.',hopeful:'그 희망을 꼭 붙잡아요.',nervous:'당신은 충분히 준비되어 있어요.'};
+var EKOR={sad:'우울해',anxious:'불안해',lonely:'외로워',angry:'화가 나',tired:'지쳐',happy:'기분 좋아',grateful:'감사해',lost:'길 잃었어',betrayed:'배신감',empty:'공허해',hopeful:'희망차',nervous:'긴장돼'};
+var EBG={sad:'var(--bl)',anxious:'var(--al)',lonely:'var(--pl)',angry:'var(--cl)',tired:'#F1EFE8',happy:'var(--pkl)',grateful:'var(--tl)',lost:'var(--al)',betrayed:'var(--cl)',empty:'var(--bl)',hopeful:'var(--gl)',nervous:'var(--al)'};
+var ECLR={sad:'var(--blue)',anxious:'var(--amber)',lonely:'var(--purple)',angry:'var(--coral)',tired:'var(--ink3)',happy:'var(--pink)',grateful:'var(--teal)',lost:'var(--amber)',betrayed:'var(--coral)',empty:'var(--blue)',hopeful:'var(--green)',nervous:'var(--amber)'};
+var AVD={
+  sad:{f:'#E6F1FB',s:'#185FA5',m:'M36 65Q50 56 64 65',bL:'M30 33Q36 38 42 33',bR:'M58 33Q64 38 70 33',t:1,b:0},
+  anxious:{f:'#FDF3E0',s:'#D4921A',m:'M38 63Q50 60 62 63',bL:'M30 35Q36 31 42 35',bR:'M58 35Q64 31 70 35',t:0,b:.2},
+  lonely:{f:'#EAE7FF',s:'#6B5FD6',m:'M37 64Q50 57 63 64',bL:'M30 34Q36 37 42 34',bR:'M58 34Q64 37 70 34',t:0,b:.3},
+  angry:{f:'#FDECEA',s:'#E8604A',m:'M37 63Q50 59 63 63',bL:'M30 37Q36 31 42 37',bR:'M58 37Q64 31 70 37',t:0,b:0},
+  tired:{f:'#F1EFE8',s:'#5F5E5A',m:'M37 63Q50 65 63 63',bL:'M30 35Q36 33 42 35',bR:'M58 35Q64 33 70 35',t:0,b:0},
+  happy:{f:'#FBEAF0',s:'#C0509A',m:'M34 60Q50 74 66 60',bL:'M30 33Q36 30 42 33',bR:'M58 33Q64 30 70 33',t:0,b:.7},
+  grateful:{f:'#E0F5EE',s:'#2D9E82',m:'M33 60Q50 76 67 60',bL:'M30 32Q36 29 42 32',bR:'M58 32Q64 29 70 32',t:0,b:.8},
+  lost:{f:'#FDF3E0',s:'#D4921A',m:'M37 62Q44 58 50 62Q56 66 63 62',bL:'M30 35Q36 31 42 36',bR:'M58 32Q64 36 70 32',t:0,b:0},
+  betrayed:{f:'#FDECEA',s:'#E8604A',m:'M37 63Q50 58 63 63',bL:'M30 37Q36 31 42 37',bR:'M58 37Q64 31 70 37',t:0,b:0},
+  empty:{f:'#E6F1FB',s:'#185FA5',m:'M38 63Q50 63 62 63',bL:'M30 34Q36 34 42 34',bR:'M58 34Q64 34 70 34',t:0,b:0},
+  hopeful:{f:'#E8F5EC',s:'#4A9B5F',m:'M35 62Q50 70 65 62',bL:'M30 33Q36 31 42 33',bR:'M58 33Q64 31 70 33',t:0,b:.5},
+  nervous:{f:'#FDF3E0',s:'#D4921A',m:'M38 63Q50 61 62 63',bL:'M30 35Q36 31 42 35',bR:'M58 35Q64 31 70 35',t:0,b:.15}
+};
+var STORIES=[
+  {id:0,nick:'달빛여행자',grade:'☀️ 햇살',av:'달',ac:'var(--pl)',tc:'var(--purple)',emo:'외로워',eac:'var(--pl)',etc:'var(--purple)',time:'2시간 전',body:'회사에서 혼자만 빠진 회식이 있었어요. 집에 오는 길에 너무 쓸쓸했어요. 제가 이상한 건가요?',urgent:false,likes:1247,comments:1089,ai:'소외감은 진짜 연결을 원한다는 마음의 신호예요.',aiColor:'var(--amber)',aiBg:'var(--al)',mine:false},
+  {id:1,nick:'새벽네시',grade:'🌿 새싹',av:'새',ac:'var(--cl)',tc:'var(--coral)',emo:'🆘 긴급',eac:'var(--cl)',etc:'var(--coral)',time:'45분 전',body:'갑자기 실직을 했어요. 가족한테도 말 못하고... 월세도 다음 달이 막막해요.',urgent:true,likes:523,comments:287,ai:'혼자 이 무게를 지고 있었군요. 실업급여(1350), 긴급복지지원(129)을 꼭 알아보세요.',aiColor:'var(--coral)',aiBg:'var(--cl)',mine:false},
+  {id:2,nick:'봄바람',grade:'🌱 씨앗',av:'봄',ac:'var(--tl)',tc:'var(--teal)',emo:'불안해',eac:'var(--al)',etc:'var(--amber)',time:'5시간 전',body:'내일 첫 발표가 있는데 너무 긴장돼요.',urgent:false,likes:234,comments:67,ai:'긴장은 중요하다는 증거예요. 당신은 충분히 준비되어 있어요.',aiColor:'var(--purple)',aiBg:'var(--pl)',mine:false},
+  {id:3,nick:'나',grade:'🌱 씨앗',av:'나',ac:'var(--pl)',tc:'var(--purple)',emo:'우울해',eac:'var(--bl)',etc:'var(--blue)',time:'방금',body:'오늘 하루도 너무 힘들었어요. 여기에 처음 올려봐요.',urgent:false,likes:12,comments:3,ai:'처음 마음을 열어주셔서 고마워요.',aiColor:'var(--coral)',aiBg:'var(--cl)',mine:true}
+];
+var CMTS={
+  0:[
+    {id:'c0-0',nick:'별빛수호자',grade:'🌙 달빛',av:'별',ac:'var(--pkl)',tc:'var(--pink)',body:'저도 똑같은 경험 있어요. 점심에 먼저 말 걸었더니 지금은 제일 친한 친구가 됐어요.',likes:234,liked:false,best:true,time:'1시간 전'},
+    {id:'c0-1',nick:'하늘구름',grade:'🌟 별빛',av:'하',ac:'var(--bl)',tc:'var(--blue)',body:'이상한 거 아니에요. 충분히 느껴도 괜찮아요.',likes:187,liked:false,best:false,time:'2시간 전'}
+  ],
+  1:[{id:'c1-0',nick:'든든한이웃',grade:'🌟 별빛',av:'든',ac:'var(--tl)',tc:'var(--teal)',body:'고용센터 직접 가봤더니 실업급여 신청이 생각보다 빨랐어요.',likes:312,liked:false,best:true,time:'30분 전'}],
+  2:[{id:'c2-0',nick:'강철멘탈',grade:'🌿 새싹',av:'강',ac:'var(--gl)',tc:'var(--green)',body:'발표 전날 긴장 안 하는 사람이 오히려 이상한 거예요! 응원해요!',likes:54,liked:false,best:true,time:'4시간 전'}],
+  3:[{id:'c3-0',nick:'별빛수호자',grade:'🌙 달빛',av:'별',ac:'var(--pkl)',tc:'var(--pink)',body:'처음 나눠주셔서 감사해요.',likes:8,liked:false,best:false,time:'방금'}]
+};
+var NOTIFS=[
+  {icon:'🏆',bg:'var(--al)',title:'내 댓글이 베스트로 채택됐어요! +50pt',sub:'달빛여행자님 사연',time:'10분 전',unread:true},
+  {icon:'❤️',bg:'var(--cl)',title:'내 댓글에 좋아요 10개 달렸어요 +20pt',sub:'',time:'1시간 전',unread:true},
+  {icon:'💬',bg:'var(--pl)',title:'내 사연에 새 댓글이 달렸어요',sub:'',time:'2시간 전',unread:true},
+  {icon:'🌿',bg:'var(--tl)',title:'새싹 등급까지 80pt 남았어요',sub:'',time:'어제',unread:false}
+];
+var RW={
+  influence:{icon:'📊',name:'월간 영향력 리포트',cost:0,msg:'이번 달 47명에게 닿았어요. 베스트 채택 2회, 좋아요 23개. 당신은 이미 많은 사람에게 빛이에요.',badge:'📊 영향력 분석가',bc:'var(--pl)',bt:'var(--purple)'},
+  badge:{icon:'🌟',name:'따뜻한 사람 배지',cost:200,msg:'프로필에 🌟 배지가 영구 추가됐어요!',badge:'🌟 따뜻한 사람',bc:'var(--al)',bt:'var(--amber)'},
+  coffee:{icon:'☕',name:'커피 기프티콘',cost:500,msg:'카카오톡으로 아메리카노 기프티콘이 발송됐어요!',badge:'☕ 교환 완료',bc:'var(--al)',bt:'var(--amber)'},
+  book:{icon:'📚',name:'감정 치유 eBook',cost:300,msg:'PDF가 다운로드됐어요.',badge:'📚 독서 시작',bc:'var(--pl)',bt:'var(--purple)'},
+  counsel:{icon:'🎙️',name:'심리상담 30분',cost:1000,req:3500,msg:'제휴 상담사와 연결됐어요.',badge:'🎙️ 상담 예약',bc:'var(--tl)',bt:'var(--teal)'},
+  hall:{icon:'🏆',name:'명예의 전당',cost:3000,req:7000,msg:'명예의 전당에 영구 등재됐어요.',badge:'🏆 명예의 전당',bc:'var(--al)',bt:'var(--amber)'}
+};
+var GC={'🌱 씨앗':'var(--green)','🌿 새싹':'var(--teal)','☀️ 햇살':'var(--amber)','🌟 별빛':'var(--purple)','🌙 달빛':'var(--pink)','✨ 루미':'var(--coral)'};
+var TEST_TEXTS=['죽고 싶어요 더 이상 못하겠어요','그것도 힘들다고요? 저는 훨씬 더 힘들어요','제 연락처는 010-1234-5678이에요','많이 힘드셨겠어요. 함께 이겨내요 💙'];
+
+// 상태
+var pts=320, gi=0, selEmo=null, wsEmo='';
+var dailyIdxs=[], savedSet={}, moreOpen=false;
+var curFeed='latest', curStory=null, curCf='all', dailyCmt=0;
+var LIMIT=20;
+var toastTimer=null;
+
+// ═══════════════════════════════
+// 유틸
+// ═══════════════════════════════
+function $(id){return document.getElementById(id);}
+function toast(msg){
+  var el=$('toast'); el.textContent=msg; el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(function(){el.classList.remove('show');},2300);
+}
+function showPop(id){$(id).classList.add('show');}
+function hidePop(id){$(id).classList.remove('show');}
+
+// ═══════════════════════════════
+// 페이지 전환
+// ═══════════════════════════════
+var curPg='pg-splash';
+function showPg(id){
+  $(curPg).classList.remove('show');
+  $(id).classList.add('show');
+  curPg=id;
+}
+function goTab(tab){
+  var map={home:'pg-home',words:'pg-words',community:'pg-community',points:'pg-points'};
+  showPg(map[tab]);
+  document.querySelectorAll('.ni').forEach(function(n){
+    n.classList.toggle('on', n.dataset.tab===tab);
+  });
+  // 탭 전환 시 모든 오버레이 닫기
+  var overlays=['notifPanel','wsBg','drwBg','drw','privacyOv','termsOv','gradeOv','thanksOv'];
+  overlays.forEach(function(id){
+    var el=$(id);
+    if(el) el.classList.remove('show');
+  });
+  if(tab==='community' && !$('feedList').children.length) renderFeed('latest');
+  if(tab==='words' && !$('dailyCards').children.length){pickDaily();renderDaily();buildCats();}
+  if(tab==='points') buildLadder();
+}
+
+// ═══════════════════════════════
+// 온보딩
+// ═══════════════════════════════
+var obStep=0;
+function gotoOb(n){
+  $('ob'+obStep).classList.remove('show');
+  ['dot0','dot1','dot2'].forEach(function(id,i){$('dot'+i).classList.toggle('on',i===n);});
+  obStep=n;
+  $('ob'+n).classList.add('show');
+}
+function startApp(){
+  showPg('pg-home');
+  var h=new Date().getHours();
+  var g=['깊은 밤이에요','좋은 아침이에요','좋은 점심이에요','좋은 오후예요','좋은 저녁이에요','오늘도 수고했어요'];
+  $('greetT').textContent=h<6?g[0]:h<11?g[1]:h<14?g[2]:h<18?g[3]:h<22?g[4]:g[5];
+  pickDaily(); renderDaily(); buildCats();
+  buildLadder(); updateGrade();
+  renderNotifs(); renderFeed('latest');
+  setTimeout(function(){addPts(10,'오늘 출석');},1500);
+}
+
+// ═══════════════════════════════
+// 아바타
+// ═══════════════════════════════
+function setAv(e){
+  var s=AVD[e]; if(!s) return;
+  var set=function(id,attr,val){var el=document.getElementById(id);if(el)el.setAttribute(attr,val);};
+  set('avF','fill',s.f); set('avF','stroke',s.s);
+  set('avEL','fill',s.s); set('avER','fill',s.s);
+  set('avM','d',s.m); set('avM','stroke',s.s);
+  set('avBrL','d',s.bL); set('avBrL','stroke',s.s);
+  set('avBrR','d',s.bR); set('avBrR','stroke',s.s);
+  set('avBL','opacity',s.b); set('avBR','opacity',s.b);
+  set('avTL','opacity',s.t?0.7:0); set('avTR','opacity',s.t?0.7:0);
+}
+
+// ═══════════════════════════════
+// 감정 선택 → 즉시 글귀 표시
+// ═══════════════════════════════
+function pickEmo(emoId){
+  selEmo=emoId;
+  document.querySelectorAll('.eb').forEach(function(b){b.classList.toggle('on',b.dataset.e===emoId);});
+  setAv(emoId);
+  $('ezMsg').textContent=EMSG[emoId]||'함께할게요.';
+  addPts(2,'감정 체크인');
+  showWord(emoId, null);
+  // 글쓰기 영역 표시
+  var wz=$('writeZone');
+  if(wz) wz.style.display='block';
+}
+
+function showWord(emoId, catOvr){
+  var loc=LOCAL[emoId]||LOCAL['sad'];
+  var cat=loc.cat, text=loc.text, src=loc.src, adv=loc.advice;
+  if(catOvr){
+    var pool=WORDS.filter(function(w){return w.cat===catOvr;});
+    if(pool.length){var p=pool[Math.floor(Math.random()*pool.length)];cat=catOvr;text=p.text;src=p.src+(p.detail?' · '+p.detail:'');}
+  } else if(Math.random()>0.4){
+    var ckeys=Object.keys(CATS);
+    var rc=ckeys[Math.floor(Math.random()*ckeys.length)];
+    var pool2=WORDS.filter(function(w){return w.cat===rc;});
+    if(pool2.length){var p2=pool2[Math.floor(Math.random()*pool2.length)];cat=rc;text=p2.text;src=p2.src+(p2.detail?' · '+p2.detail:'');}
+  }
+  renderAI(emoId,adv,cat,text,src);
+}
+
+function renderAI(emoId,adv,catId,text,src){
+  var c=CATS[catId]||CATS['modern'];
+  var eb=EBG[emoId]||'var(--pl)', ec=ECLR[emoId]||'var(--purple)', el=EKOR[emoId]||'';
+  $('aiEtag').innerHTML=el?'<span style="font-size:10px;font-weight:600;padding:3px 8px;border-radius:10px;background:'+eb+';color:'+ec+'">'+el+'</span>':'';
+  $('aiBody').innerHTML=
+    '<div class="ai-advice">\u201c'+adv+'\u201d</div>'+
+    '<div class="ai-qbox" style="border-left-color:'+c.c+';background:'+c.b+'">'+
+      '<div class="ai-qcat" style="color:'+c.c+'">'+c.n+'</div>'+
+      '<div class="ai-qtext">\u201c'+text+'\u201d</div>'+
+      '<div class="ai-qsrc">\u2014 '+src+'</div>'+
+    '</div>';
+  $('aiCard').style.display='block';
+  $('aiBtns').style.display='flex';
+}
+
+// ═══════════════════════════════
+// 글귀 탭
+// ═══════════════════════════════
+function pickDaily(){
+  var ckeys=Object.keys(CATS).sort(function(){return Math.random()-.5;}).slice(0,3);
+  dailyIdxs=[]; var used={};
+  ckeys.forEach(function(cat){
+    var pool=[];
+    WORDS.forEach(function(w,i){if(w.cat===cat&&!used[i])pool.push(i);});
+    if(!pool.length)return;
+    var idx=pool[Math.floor(Math.random()*pool.length)];
+    dailyIdxs.push(idx); used[idx]=true;
+  });
+}
+function renderDaily(){
+  var c=$('dailyCards'); c.innerHTML='';
+  dailyIdxs.forEach(function(idx){
+    var w=WORDS[idx], cat=CATS[w.cat], sv=savedSet[idx];
+    var div=document.createElement('div'); div.className='dcard'; div.style.background=cat.b;
+    div.innerHTML='<div style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;opacity:.8;color:'+cat.c+'">'+cat.n+'</div>'+
+      '<div style="font-family:\'DM Serif Display\',serif;font-size:15px;line-height:1.75;margin-bottom:8px">\u201c'+w.text+'\u201d</div>'+
+      '<div style="font-size:10px;opacity:.6">'+w.src+(w.detail?' · '+w.detail:'')+'</div>'+
+      '<div class="dc-foot"><button class="dc-save" data-idx="'+idx+'" style="color:'+cat.c+'">'+
+      (sv?'★ 저장됨':'☆ 저장')+'</button>'+
+      '<span style="font-size:9px;font-weight:600;padding:2px 6px;border-radius:7px;background:rgba(0,0,0,.06);color:'+cat.c+'">'+cat.n+'</span></div>';
+    c.appendChild(div);
+  });
+  c.querySelectorAll('.dc-save').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var idx=parseInt(btn.dataset.idx);
+      if(savedSet[idx]){delete savedSet[idx];}else{savedSet[idx]=true;addPts(3,'글귀 저장');}
+      renderDaily(); toast(savedSet[idx]?'글귀 저장됐어요 ✦ +3pt':'저장 취소됐어요');
+    });
+  });
+  // 홈 미리보기
+  if(dailyIdxs.length){
+    var w0=WORDS[dailyIdxs[0]], cat0=CATS[w0.cat];
+    $('dpCat').textContent=cat0.n; $('dpCat').style.color=cat0.c;
+    $('dpText').textContent='\u201c'+w0.text+'\u201d';
+    $('dpSrc').textContent='\u2014 '+w0.src+(w0.detail?' · '+w0.detail:'')+' · 글귀 탭에서 더 보기 \u2192';
+  }
+}
+function buildCats(){
+  var c=$('catExplore'); c.innerHTML='';
+  Object.keys(CATS).forEach(function(id){
+    var cat=CATS[id], words=WORDS.filter(function(w){return w.cat===id;});
+    var sec=document.createElement('div'); sec.style.marginBottom='14px';
+    sec.innerHTML='<div style="font-size:11px;font-weight:600;margin-bottom:7px;color:'+cat.c+'">'+cat.n+
+      ' <span style="font-weight:400;color:var(--ink3);font-size:10px">'+words.length+'개</span></div>';
+    words.forEach(function(w){
+      var item=document.createElement('div'); item.className='cat-item';
+      item.innerHTML='<div class="ci-text">\u201c'+w.text+'\u201d</div><div class="ci-src">'+w.src+(w.detail?' · '+w.detail:'')+'</div>';
+      item.addEventListener('click',function(){addPts(3,'글귀 저장');toast('글귀 저장됐어요 ✦ +3pt');});
+      sec.appendChild(item);
+    });
+    c.appendChild(sec);
+  });
+}
+
+// ═══════════════════════════════
+// 커뮤니티
+// ═══════════════════════════════
+function renderFeed(tab){
+  curFeed=tab;
+  document.querySelectorAll('.ft').forEach(function(f){f.classList.toggle('on',f.dataset.feed===tab);});
+  $('bestBanner').style.display=(tab==='latest')?'block':'none';
+  var st=STORIES.slice();
+  if(tab==='best')st=st.sort(function(a,b){return b.likes-a.likes;}).slice(0,10);
+  else if(tab==='urgent')st=st.filter(function(s){return s.urgent;});
+  else if(tab==='mine')st=st.filter(function(s){return s.mine;});
+  else st=st.sort(function(a,b){return b.id-a.id;});
+  var list=$('feedList'); list.innerHTML='';
+  if(!st.length){
+    list.innerHTML='<div style="text-align:center;padding:32px 20px;color:var(--ink3)"><div style="font-size:32px;margin-bottom:10px">'+(tab==='mine'?'✍️':'🔍')+'</div><p style="font-size:13px;line-height:1.6">'+(tab==='mine'?'아직 올린 사연이 없어요.<br>첫 번째 마음을 나눠보세요!':'해당하는 사연이 없어요.')+'</p></div>';
+    return;
+  }
+  st.forEach(function(s){list.appendChild(mkCard(s));});
+}
+function mkCard(s){
+  var div=document.createElement('div');
+  div.className='sc'+(s.urgent?' urg':s.likes>=500?' hot':'');
+  var cm=CMTS[s.id]||[], best=null;
+  for(var i=0;i<cm.length;i++){if(cm[i].best){best=cm[i];break;}}
+  div.innerHTML=
+    '<div class="sc-top">'+
+      '<div class="sc-av" style="background:'+s.ac+';color:'+s.tc+'">'+s.av+'</div>'+
+      '<div><div class="sc-nick">'+s.nick+' <span class="sc-grade" style="color:'+(GC[s.grade]||'var(--ink3)')+'">'+s.grade+'</span></div>'+
+        '<div class="sc-time">'+s.time+'</div></div>'+
+      '<span class="sc-etag" style="background:'+s.eac+';color:'+s.etc+'">'+s.emo+'</span>'+
+    '</div>'+
+    '<div class="sc-body">'+s.body+'</div>'+
+    '<div class="sc-ai" style="border-left-color:'+s.aiColor+';background:'+s.aiBg+'">'+
+      '<div class="sc-ai-lbl" style="color:'+s.aiColor+'">✦ Lumi 조언</div>'+
+      '<div class="sc-ai-txt">'+s.ai+'</div>'+
+    '</div>'+
+    (best?'<div class="sc-best-wrap"><div class="sc-best-av">🏆</div><div class="sc-best-body"><div style="font-size:9px;font-weight:500;color:var(--teal);margin-bottom:1px">'+best.nick+' · 베스트</div><div style="font-size:11px;line-height:1.5;color:var(--ink)">'+best.body.slice(0,60)+(best.body.length>60?'...':'')+'</div></div></div>':'')+
+    (s.comments>1?'<div class="sc-more-link" data-sid="'+s.id+'">댓글 '+s.comments.toLocaleString()+'개 모두 보기 →</div>':'')+
+    '<div class="sc-foot">'+
+      '<button class="sc-act" data-like="'+s.id+'">'+
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>'+
+        '<span class="lkn">'+s.likes.toLocaleString()+'</span></button>'+
+      '<button class="sc-act" data-cmt="'+s.id+'">'+
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>'+
+        s.comments.toLocaleString()+'</button>'+
+      (s.likes>=1000?'<span style="font-size:9px;background:var(--goldl);color:var(--gold);padding:2px 7px;border-radius:10px;font-weight:600">🔥 인기</span>':'')+
+      (s.mine?'<span style="font-size:9px;background:var(--pl);color:var(--purple);padding:2px 7px;border-radius:10px;font-weight:600">내 글</span>':'')+
+      '<button class="sc-rep" data-sid="'+s.id+'">신고</button>'+
+    '</div>';
+  var lb=div.querySelector('[data-like="'+s.id+'"]');
+  lb.addEventListener('click',function(){
+    lb.classList.toggle('liked');
+    var lk=lb.classList.contains('liked');
+    s.likes+=lk?1:-1;
+    lb.querySelector('.lkn').textContent=s.likes.toLocaleString();
+    lb.style.color=lk?'var(--coral)':'var(--ink3)';
+    if(lk)addPts(1,'좋아요');
+  });
+  var cb=div.querySelector('[data-cmt="'+s.id+'"]');
+  cb.addEventListener('click',function(){openDrw(s.id);});
+  var ml=div.querySelector('[data-sid="'+s.id+'"].sc-more-link');
+  if(ml)ml.addEventListener('click',function(){openDrw(s.id);});
+  var rb=div.querySelector('.sc-rep');
+  rb.addEventListener('click',function(){toast('신고 접수됐어요. 익명 처리돼요.');addPts(10,'신고');});
+  return div;
+}
+function addStory(body,emo,urgent){
+  var ns={id:STORIES.length,nick:'나',grade:'🌱 씨앗',av:'나',ac:'var(--pl)',tc:'var(--purple)',
+    emo:urgent?'🆘 긴급':emo,eac:urgent?'var(--cl)':'var(--pl)',etc:urgent?'var(--coral)':'var(--purple)',
+    time:'방금',body:body,urgent:urgent,likes:0,comments:0,
+    ai:'따뜻한 사연을 나눠주셔서 감사해요.',aiColor:'var(--coral)',aiBg:'var(--cl)',mine:true};
+  STORIES.unshift(ns); CMTS[ns.id]=[];
+  addPts(20,'사연 올리기'); renderFeed(curFeed);
+}
+
+// ═══════════════════════════════
+// 댓글 서랍
+// ═══════════════════════════════
+function openDrw(sid){
+  curStory=sid; curCf='all';
+  document.querySelectorAll('.cf').forEach(function(c){c.classList.toggle('on',c.dataset.cf==='all');});
+  var s=null; for(var i=0;i<STORIES.length;i++){if(STORIES[i].id===sid){s=STORIES[i];break;}}
+  $('drwStory').innerHTML='<b>'+s.nick+' · '+s.grade+'</b>'+s.body;
+  $('drwTitle').textContent='댓글 '+s.comments.toLocaleString()+'개';
+  $('drwLimit').textContent='오늘 남은 댓글: '+(LIMIT-dailyCmt)+'개';
+  renderCmts(CMTS[sid]||[],'all');
+  $('drwBg').classList.add('show'); $('drw').classList.add('show');
+}
+function closeDrw(){
+  $('drwBg').classList.remove('show'); $('drw').classList.remove('show');
+  $('cmtTa').value=''; curStory=null;
+}
+function renderCmts(cmts,filter){
+  var list=$('cmtList'); list.innerHTML='';
+  var fl=cmts.slice();
+  if(filter==='best')fl=fl.filter(function(c){return c.best;});
+  else if(filter==='recent')fl=fl.slice().reverse();
+  else if(filter==='empathy')fl=fl.slice().sort(function(a,b){return b.likes-a.likes;});
+  fl.slice(0,20).forEach(function(c){list.appendChild(mkCmt(c));});
+  if(fl.length>20){
+    var btn=document.createElement('button'); btn.className='load-more';
+    btn.textContent='댓글 '+(fl.length-20)+'개 더 보기';
+    btn.addEventListener('click',function(){fl.slice(20).forEach(function(c){list.insertBefore(mkCmt(c),btn);});btn.remove();});
+    list.appendChild(btn);
+  }
+  if(!fl.length)list.innerHTML='<div style="text-align:center;padding:24px;color:var(--ink3);font-size:12px">첫 응원을 남겨보세요!</div>';
+}
+function mkCmt(c){
+  var s=null; for(var i=0;i<STORIES.length;i++){if(STORIES[i].id===curStory){s=STORIES[i];break;}}
+  var isAuth=s&&s.mine;
+  var div=document.createElement('div'); div.className='cmt-item';
+  div.innerHTML=
+    '<div class="ci-av" style="background:'+(c.ac||'var(--cream)')+';color:'+(c.tc||'var(--ink)')+'">'+(c.av||c.nick[0])+'</div>'+
+    '<div class="ci-body">'+
+      '<div class="ci-top">'+
+        '<span class="ci-nick">'+c.nick+'</span>'+
+        '<span class="ci-grade" style="color:'+(GC[c.grade]||'var(--ink3)')+'">'+c.grade+'</span>'+
+        '<span class="ci-time">'+c.time+'</span>'+
+        (c.best?'<span class="ci-best-badge">베스트</span>':'')+
+      '</div>'+
+      '<div class="ci-bubble'+(c.best?' best':'')+'" style="">'+c.body+'</div>'+
+      '<div class="ci-acts">'+
+        '<button class="ci-like'+(c.liked?' on':'')+'" data-cid="'+c.id+'" style="color:'+(c.liked?'var(--coral)':'var(--ink3)')+'">'+
+          '<svg viewBox="0 0 24 24" fill="'+(c.liked?'currentColor':'none')+'" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>'+
+          '<span>'+c.likes+'</span></button>'+
+        (isAuth&&!c.best?'<button class="ci-adopt" data-cid="'+c.id+'">베스트 채택</button>':'')+
+      '</div>'+
+    '</div>';
+  var lb=div.querySelector('.ci-like');
+  lb.addEventListener('click',function(){
+    c.liked=!c.liked; c.likes+=c.liked?1:-1;
+    lb.classList.toggle('on',c.liked); lb.style.color=c.liked?'var(--coral)':'var(--ink3)';
+    lb.querySelector('svg').setAttribute('fill',c.liked?'currentColor':'none');
+    lb.querySelector('span').textContent=c.likes;
+    if(c.liked)addPts(2,'댓글 좋아요');
+  });
+  var ab=div.querySelector('.ci-adopt');
+  if(ab){ab.addEventListener('click',function(){
+    var cm=CMTS[curStory]||[]; cm.forEach(function(x){x.best=false;}); c.best=true;
+    addPts(50,'베스트 채택'); renderCmts(cm,curCf); toast('베스트 채택됐어요! +50pt');
+  });}
+  return div;
+}
+function submitCmt(){
+  var ta=$('cmtTa'), text=ta.value.trim(); if(!text)return;
+  if(dailyCmt>=LIMIT){toast('오늘 댓글은 최대 '+LIMIT+'개까지 가능해요');return;}
+  var nc={id:'c'+curStory+'-'+Date.now(),nick:'나',grade:'🌱 씨앗',av:'나',ac:'var(--pl)',tc:'var(--purple)',body:text,likes:0,liked:false,best:false,time:'방금'};
+  if(!CMTS[curStory])CMTS[curStory]=[];
+  CMTS[curStory].push(nc);
+  var s=null; for(var i=0;i<STORIES.length;i++){if(STORIES[i].id===curStory){s=STORIES[i];break;}}
+  if(s)s.comments++;
+  dailyCmt++;
+  $('drwTitle').textContent='댓글 '+(s?s.comments:0)+'개';
+  $('drwLimit').textContent='오늘 남은 댓글: '+(LIMIT-dailyCmt)+'개';
+  renderCmts(CMTS[curStory],curCf);
+  ta.value=''; ta.style.height='auto';
+  addPts(5,'응원 댓글');
+  setTimeout(function(){var l=$('cmtList');l.scrollTop=l.scrollHeight;},100);
+}
+
+// ═══════════════════════════════
+// 알림
+// ═══════════════════════════════
+function renderNotifs(){
+  var scr=$('ndScr'); scr.innerHTML='';
+  NOTIFS.forEach(function(n){
+    var div=document.createElement('div'); div.className='ni-item'+(n.unread?' unread':'');
+    div.innerHTML='<div class="ni-icon" style="background:'+n.bg+'">'+n.icon+'</div>'+
+      '<div class="ni-body"><div class="ni-title">'+n.title+'</div>'+
+      (n.sub?'<div style="font-size:10px;color:var(--ink3);font-style:italic;margin-bottom:2px">'+n.sub+'</div>':'')+
+      '<div class="ni-time">'+n.time+'</div></div>'+
+      (n.unread?'<div class="ni-dot"></div>':'');
+    div.addEventListener('click',function(){n.unread=false;div.classList.remove('unread');updateNdot();});
+    scr.appendChild(div);
+  });
+  updateNdot();
+}
+function updateNdot(){
+  $('notifDot').style.display=NOTIFS.some(function(n){return n.unread;})?'block':'none';
+}
+
+// ═══════════════════════════════
+// 포인트 & 등급
+// ═══════════════════════════════
+function addPts(n,reason){
+  var old=gi; pts+=n;
+  for(var i=GRADES.length-1;i>=0;i--){if(pts>=GRADES[i].min){gi=i;break;}}
+  updateGrade();
+  if(n>0)toast('+'+n+'pt · '+reason);
+  if(gi>old)setTimeout(function(){showGradeUp(gi);},600);
+}
+function updateGrade(){
+  var g=GRADES[gi], ng=GRADES[Math.min(gi+1,GRADES.length-1)];
+  var prog=gi===GRADES.length-1?100:Math.round((pts-g.min)/(g.max-g.min)*100);
+  var toN=Math.max(0,g.max-pts);
+  var s=function(id,v){var el=$(id);if(el)el.textContent=v;};
+  var sc=function(id,p,v){var el=$(id);if(el)el.style[p]=v;};
+  $('gradePill').textContent=g.e+' '+g.n+' · '+pts.toLocaleString()+'pt';
+  sc('gradePill','background',g.c+'22'); sc('gradePill','color',g.c);
+  s('gmcE',g.e); s('gmcN',g.n+' 등급'); sc('gmcN','color',g.c);
+  s('gmcT',g.t); s('gmcP',pts.toLocaleString()+' pt');
+  sc('gmcF','width',prog+'%'); sc('gmcF','background',g.c);
+  s('ghE',g.e); s('ghN',g.n+' 등급'); sc('ghN','color',g.c);
+  sc('ghRing','borderColor',g.c);
+  s('ghT',g.t); s('ghD',g.d); s('ghPts',pts.toLocaleString());
+  sc('ghFill','width',prog+'%'); sc('ghFill','background',g.c);
+  s('ghFrom',g.min.toLocaleString()+'pt');
+  s('ghTo',g.max===99999?'∞':g.max.toLocaleString()+'pt');
+  s('ghNext',gi<GRADES.length-1?ng.e+' '+ng.n+'까지 '+toN.toLocaleString()+'pt 남았어요':'✨ 최고 등급!');
+}
+function buildLadder(){
+  var c=$('gradeLadder'); if(!c)return; c.innerHTML='';
+  GRADES.forEach(function(g,i){
+    var div=document.createElement('div'); div.className='gr-row'+(i===gi?' cur':'');
+    if(i===gi){div.style.borderColor=g.c;div.style.borderWidth='2px';}
+    if(i>gi)div.style.opacity='.42';
+    div.innerHTML='<div class="gr-e">'+g.e+'</div>'+
+      '<div class="gr-info"><div class="gr-n" style="color:'+g.c+'">'+g.n+' 등급</div>'+
+      '<div class="gr-t">'+g.t+'</div>'+
+      '<div class="gr-p">'+g.min.toLocaleString()+'~'+(g.max===99999?'∞':g.max.toLocaleString())+'pt</div>'+
+      '<div class="gr-perks">'+g.perks.map(function(p){return '<span class="gr-perk">'+p+'</span>';}).join('')+'</div></div>'+
+      (i===gi?'<span class="cur-badge" style="background:'+g.c+';color:#fff">현재 ✓</span>':'');
+    c.appendChild(div);
+  });
+}
+function showGradeUp(idx){
+  var g=GRADES[idx];
+  $('popE').textContent=g.e; $('popT').textContent=g.n+' — '+g.t;
+  $('popM').textContent=g.d+'\n새 혜택이 열렸어요!';
+  $('popB').textContent=g.e+' '+g.n+' 달성';
+  $('popB').style.background=g.c+'22'; $('popB').style.color=g.c;
+  showPop('gradeOv');
+}
+
+// ═══════════════════════════════
+// 리워드
+// ═══════════════════════════════
+function claimRw(key){
+  var r=RW[key]; if(!r)return;
+  if(r.req&&pts<r.req){toast('등급 또는 포인트가 부족해요 (필요: '+r.req.toLocaleString()+'pt)');return;}
+  if(r.cost>0&&pts<r.cost){toast('포인트가 부족해요 (필요: '+r.cost+'pt)');return;}
+  if(r.cost>0)addPts(-r.cost,r.name+' 교환');
+  setTimeout(function(){showThanks(r.icon,r.name+' 완료!',r.msg,r.badge,r.bc,r.bt,'닫기');},r.cost>0?300:0);
+}
+function showThanks(e,t,m,b,bc,bt,btn){
+  $('thE').textContent=e; $('thT').textContent=t; $('thM').textContent=m;
+  $('thB').textContent=b||''; $('thB').style.background=bc||'transparent'; $('thB').style.color=bt||'var(--ink)';
+  $('thanksClose').textContent=btn||'확인';
+  showPop('thanksOv');
+}
+
+// ═══════════════════════════════
+// 이벤트 등록
+// ═══════════════════════════════
+window.addEventListener('load', function(){
+
+  // 스플래시
+  $('startBtn').addEventListener('click', function(){showPg('pg-onboard');});
+
+  // 온보딩
+  $('ob0Btn').addEventListener('click', function(){gotoOb(1);});
+  $('ob0Skip').addEventListener('click', startApp);
+  $('ob1Btn').addEventListener('click', function(){gotoOb(2);});
+  $('ob1Skip').addEventListener('click', startApp);
+  $('ob2Btn').addEventListener('click', startApp);
+
+  // 네비
+  document.querySelectorAll('.ni').forEach(function(ni){
+    ni.addEventListener('click', function(){if(ni.dataset.tab)goTab(ni.dataset.tab);});
+  });
+
+  // 감정 버튼
+  document.querySelector('.emo-grid').addEventListener('click', function(e){
+    var eb=e.target.closest('.eb');
+    if(eb&&eb.dataset.e)pickEmo(eb.dataset.e);
+  });
+
+  // AI 버튼
+  $('refreshBtn').addEventListener('click', function(){
+    if(!selEmo)return;
+    var ckeys=Object.keys(CATS);
+    showWord(selEmo, ckeys[Math.floor(Math.random()*ckeys.length)]);
+    toast('새 글귀로 바꿨어요');
+  });
+  $('moreWordsBtn').addEventListener('click', function(){goTab('words');});
+
+  // 홈 카드 클릭
+  $('gmcBtn').addEventListener('click', function(){goTab('points');});
+  $('gradePill').addEventListener('click', function(){goTab('points');});
+  $('dpPrev').addEventListener('click', function(){goTab('words');});
+
+  // 글귀 탭
+  $('dailyRefBtn').addEventListener('click', function(){pickDaily();renderDaily();toast('새 글귀로 바꿨어요');});
+  $('moreBtn').addEventListener('click', function(){
+    moreOpen=!moreOpen;
+    $('catExplore').style.display=moreOpen?'block':'none';
+    $('moreIcon').style.transform=moreOpen?'rotate(180deg)':'';
+  });
+
+  // 커뮤니티
+  $('feedTabs').addEventListener('click', function(e){
+    var ft=e.target.closest('.ft');
+    if(ft&&ft.dataset.feed)renderFeed(ft.dataset.feed);
+  });
+  $('bestBanner').addEventListener('click', function(){openDrw(0);});
+  document.querySelector('.test-box').addEventListener('click', function(e){
+    var ti=e.target.closest('.test-item');
+    if(!ti||ti.dataset.test===undefined)return;
+    openDrw(0);
+    setTimeout(function(){var ta=$('cmtTa');if(ta)ta.value=TEST_TEXTS[parseInt(ti.dataset.test)];},400);
+  });
+  $('fabBtn').addEventListener('click', function(){$('wsBg').classList.add('show');});
+
+  // 서랍
+  $('drwBg').addEventListener('click', closeDrw);
+  $('drwClose').addEventListener('click', closeDrw);
+  $('cmtSend').addEventListener('click', submitCmt);
+  $('cfStrip').addEventListener('click', function(e){
+    var cf=e.target.closest('.cf');
+    if(!cf||!cf.dataset.cf)return;
+    curCf=cf.dataset.cf;
+    document.querySelectorAll('.cf').forEach(function(c){c.classList.toggle('on',c.dataset.cf===curCf);});
+    renderCmts(CMTS[curStory]||[],curCf);
+  });
+
+  // 알림
+  $('notifBtn').addEventListener('click', function(){
+    $('notifPanel').classList.add('show');
+    renderNotifs();
+  });
+  $('ndBack').addEventListener('click', function(){
+    $('notifPanel').classList.remove('show');
+  });
+  $('ndReadAll').addEventListener('click', function(){NOTIFS.forEach(function(n){n.unread=false;});renderNotifs();});
+
+  // 글쓰기 시트
+  $('wsX').addEventListener('click', function(){$('wsBg').classList.remove('show');});
+  $('wsBg').addEventListener('click', function(e){if(e.target===$('wsBg'))$('wsBg').classList.remove('show');});
+  $('wsEmos').addEventListener('click', function(e){
+    var we=e.target.closest('.we');
+    if(!we||!we.dataset.we)return;
+    document.querySelectorAll('.we').forEach(function(w){w.classList.remove('on');});
+    we.classList.add('on'); wsEmo=we.dataset.we;
+  });
+  $('wsSubmit').addEventListener('click', function(){
+    var text=$('wsTa').value.trim();
+    if(!text){toast('사연을 적어주세요');return;}
+    if(!wsEmo){toast('감정을 선택해주세요');return;}
+    var urgent=$('wsUrgent').checked;
+    $('wsBg').classList.remove('show');
+    $('wsTa').value=''; wsEmo='';
+    document.querySelectorAll('.we').forEach(function(w){w.classList.remove('on');});
+    addStory(text,wsEmo||'우울해',urgent);
+    toast('사연이 올라갔어요 ✦ +20pt');
+  });
+
+  // 포인트 탭
+  $('ptabStrip').addEventListener('click', function(e){
+    var tb=e.target.closest('.tb');
+    if(!tb||!tb.dataset.ptab)return;
+    var tab=tb.dataset.ptab;
+    document.querySelectorAll('.tb').forEach(function(t){t.classList.toggle('on',t.dataset.ptab===tab);});
+    ['reward','give','ladder','history'].forEach(function(t){$('ptc-'+t).style.display=t===tab?'block':'none';});
+  });
+  document.querySelectorAll('.rw-card').forEach(function(card){
+    card.addEventListener('click',function(){if(card.dataset.rw)claimRw(card.dataset.rw);});
+  });
+
+  // 기부/선물
+  $('donateBtn').addEventListener('click', function(){
+    var amt=parseInt($('donateAmt').value)||0;
+    if(amt<100){toast('최소 100pt부터 기부할 수 있어요');return;}
+    if(pts<amt){toast('포인트가 부족해요');return;}
+    addPts(-amt,'기부');
+    var cur=parseInt($('inflDonate').textContent)||0;
+    $('inflDonate').textContent=cur+amt;
+    $('donateAmt').value='';
+    showThanks('💛','기부 완료!',amt.toLocaleString()+'pt가 실제 도움이 필요한 분께 전달됐어요.','💛 따뜻한 기부자','var(--tl)','var(--teal)','감사해요!');
+  });
+  $('giftBtn').addEventListener('click', function(){
+    var nick=$('giftNick').value.trim();
+    if(!nick){toast('닉네임을 입력해주세요');return;}
+    if(pts<100){toast('포인트가 부족해요');return;}
+    addPts(-100,'포인트 선물'); $('giftNick').value='';
+    showThanks('🎁','선물 완료!',nick+'님께 100pt를 선물했어요.','🎁 나눔의 사람','var(--pl)','var(--purple)','기분 좋다!');
+  });
+
+  // 팝업 닫기
+  $('gradeClose').addEventListener('click', function(){hidePop('gradeOv');});
+  $('thanksClose').addEventListener('click', function(){hidePop('thanksOv');});
+  $('gradeOv').addEventListener('click', function(e){if(e.target===$('gradeOv'))hidePop('gradeOv');});
+  $('thanksOv').addEventListener('click', function(e){if(e.target===$('thanksOv'))hidePop('thanksOv');});
+
+
+  // ── 홈 글쓰기 ──
+  var writeZone = $('writeZone');
+  var storyTa = $('storyTa');
+  if(writeZone){
+    // 감정 선택 후 글쓰기 영역 표시는 pickEmo에서 처리
+    var writeCancelBtn = $('writeCancelBtn');
+    var writeSubmitBtn = $('writeSubmitBtn');
+    if(writeCancelBtn){
+      writeCancelBtn.addEventListener('click', function(){
+        writeZone.style.display='none';
+        storyTa.value='';
+      });
+    }
+    if(writeSubmitBtn){
+      writeSubmitBtn.addEventListener('click', function(){
+        var text = storyTa.value.trim();
+        if(!text){toast('사연을 적어주세요');return;}
+        var urgent = $('urgentChk') && $('urgentChk').checked;
+        var emo = selEmo ? EKOR[selEmo] : '우울해';
+        writeZone.style.display='none';
+        storyTa.value='';
+        addStory(text, emo, urgent);
+        goTab('community');
+        toast('사연이 올라갔어요 ✦ +20pt');
+      });
+    }
+  }
+
+  // ── 오프라인 감지 ──
+  window.addEventListener('offline', function(){
+    $('offlineBar').classList.add('show');
+  });
+  window.addEventListener('online', function(){
+    $('offlineBar').classList.remove('show');
+    toast('인터넷 연결이 복구됐어요 ✅');
+  });
+
+  // ── 개인정보/약관 팝업 ──
+  var privacyBtn = $('privacyBtn');
+  var termsBtn = $('termsBtn');
+  var contactBtn = $('contactBtn');
+  var privacyClose = $('privacyClose');
+  var termsClose = $('termsClose');
+  if(privacyBtn) privacyBtn.addEventListener('click', function(){$('privacyOv').classList.add('show');});
+  if(termsBtn) termsBtn.addEventListener('click', function(){$('termsOv').classList.add('show');});
+  if(contactBtn) contactBtn.addEventListener('click', function(){
+    toast('문의: lumi.app.help@gmail.com');
+  });
+  if(privacyClose) privacyClose.addEventListener('click', function(){$('privacyOv').classList.remove('show');});
+  if(termsClose) termsClose.addEventListener('click', function(){$('termsOv').classList.remove('show');});
+  $('privacyOv').addEventListener('click', function(e){if(e.target===$('privacyOv'))$('privacyOv').classList.remove('show');});
+  $('termsOv').addEventListener('click', function(e){if(e.target===$('termsOv'))$('termsOv').classList.remove('show');});
+
+  // ── 공유하기 (홈 하단 미리보기 클릭 시) ──
+  var dpPrev = $('dpPrev');
+  if(dpPrev){
+    dpPrev.addEventListener('contextmenu', function(e){
+      e.preventDefault();
+      if(navigator.share){
+        navigator.share({
+          title:'Lumi — 당신 곁의 따뜻한 빛',
+          text:'익명으로, 판단 없이 마음을 나눠요.',
+          url: window.location.href
+        });
+      } else {
+        navigator.clipboard && navigator.clipboard.writeText(window.location.href);
+        toast('링크가 복사됐어요! 친구에게 공유해보세요 🌱');
+      }
+    });
+  }
+
+  // ── 피드 카드 공유하기 (사연 길게 누르면) ──
+  // 사연 홈 미리보기 탭하면 글쓰기 열기
+  var aiCard = $('aiCard');
+  if(aiCard){
+    aiCard.addEventListener('click', function(){
+      var wz = $('writeZone');
+      if(wz) wz.style.display = wz.style.display==='block'?'none':'block';
+    });
+  }
+
+  // ── 커뮤니티 탭 공유 버튼 ──
+  var shareBtn = document.getElementById('shareAppBtn');
+  if(shareBtn){
+    shareBtn.addEventListener('click', function(){
+      if(navigator.share){
+        navigator.share({title:'Lumi',text:'마음을 나누는 커뮤니티 Lumi에 함께해요!',url:window.location.href});
+      } else {
+        navigator.clipboard && navigator.clipboard.writeText(window.location.href);
+        toast('링크가 복사됐어요! 📋');
+      }
+    });
+  }
+
+  console.log('Lumi 준비 완료 ✅');
+});
+</script>
+</body>
+</html>
