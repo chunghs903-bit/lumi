@@ -1137,7 +1137,7 @@ function goTab(tab){
     var el=$(id);
     if(el) el.classList.remove('show');
   });
-  if(tab==='community' && !$('feedList').children.length) renderFeed('latest');
+  if(tab==='community') renderFeed(curFeed);
   if(tab==='words' && !$('dailyCards').children.length){pickDaily();renderDaily();buildCats();}
   if(tab==='points') buildLadder();
 }
@@ -1631,10 +1631,17 @@ window.addEventListener('load', function(){
     if(!text){toast('사연을 적어주세요');return;}
     if(!wsEmo){toast('감정을 선택해주세요');return;}
     var urgent=$('wsUrgent').checked;
+    var emoText=wsEmo;
     $('wsBg').classList.remove('show');
     $('wsTa').value=''; wsEmo='';
     document.querySelectorAll('.we').forEach(function(w){w.classList.remove('on');});
-    addStory(text,wsEmo||'우울해',urgent);
+    addStory(text, emoText, urgent);
+    goTab('community');
+    // 내 사연 탭으로 이동해서 올린 글 바로 확인
+    renderFeed('mine');
+    document.querySelectorAll('.ft').forEach(function(f){
+      f.classList.toggle('on', f.dataset.feed==='mine');
+    });
     toast('사연이 올라갔어요 ✦ +20pt');
   });
 
@@ -1699,6 +1706,11 @@ window.addEventListener('load', function(){
         storyTa.value='';
         addStory(text, emo, urgent);
         goTab('community');
+        // 내 사연 탭으로 이동해서 올린 글 바로 확인
+        renderFeed('mine');
+        document.querySelectorAll('.ft').forEach(function(f){
+          f.classList.toggle('on', f.dataset.feed==='mine');
+        });
         toast('사연이 올라갔어요 ✦ +20pt');
       });
     }
