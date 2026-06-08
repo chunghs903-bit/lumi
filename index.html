@@ -489,6 +489,34 @@ max-width:90vw;text-align:center}
   display:none}
 .welcome-banner.show{display:block}
 </style>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc, onSnapshot, orderBy, query, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC7cE6OA29uUX3AYBiUIxohrwntW0G2GFA",
+  authDomain: "lumi-app-40ffc.firebaseapp.com",
+  projectId: "lumi-app-40ffc",
+  storageBucket: "lumi-app-40ffc.firebasestorage.app",
+  messagingSenderId: "515295980293",
+  appId: "1:515295980293:web:7bde4b5ac0e5b1eae9a56c",
+  measurementId: "G-6JZBPCB3R6"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.db = db;
+window.fsCollection = collection;
+window.fsAddDoc = addDoc;
+window.fsOnSnapshot = onSnapshot;
+window.fsOrderBy = orderBy;
+window.fsQuery = query;
+window.fsServerTimestamp = serverTimestamp;
+
+window.dispatchEvent(new Event('firebaseReady'));
+console.log('Firebase 연결 완료!');
+</script>
 </head>
 <body>
 <div class="device">
