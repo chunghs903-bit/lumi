@@ -1170,6 +1170,61 @@ function startApp(){
   buildLadder(); updateGrade();
   renderNotifs(); renderFeed('latest');
   setTimeout(function(){addPts(10,'오늘 출석');},1500);
+
+  // Firebase에서 실제 사연 불러오기
+  loadStoriesFromFirebase();
+}
+
+function loadStoriesFromFirebase(){
+  if(!window.db) return;
+  try{
+    var q = window.fsQuery(
+      window.fsCollection(window.db,'stories'),
+      window.fsOrderBy('createdAt','desc')
+    );
+    window.fsOnSnapshot(q, function(snapshot){
+      var fbStories = [];
+      snapshot.forEach(function(doc){
+        var d = doc.data();
+        fbStories.push({
+          id: 'fb-'+doc.id,
+          nick: d.nick||'익명',
+          grade: '🌱 씨앗',
+          av: '익',
+          ac: 'var(--pl)',
+          tc: 'var(--purple)',
+          emo: d.emo||'우울해',
+          eac: d.urgent?'var(--cl)':'var(--pl)',
+          etc: d.urgent?'var(--coral)':'var(--purple)',
+          time: d.createdAt ? timeAgo(d.createdAt.toDate()) : '방금',
+          body: d.body||'',
+          urgent: d.urgent||false,
+          likes: d.likes||0,
+          comments: d.comments||0,
+          ai: d.ai||'따뜻한 사연을 나눠주셔서 감사해요.',
+          aiColor: 'var(--coral)',
+          aiBg: 'var(--cl)',
+          mine: false,
+          fromFb: true
+        });
+      });
+      // 기존 샘플 데이터 유지하고 Firebase 사연 앞에 추가
+      var sampleStories = STORIES.filter(function(s){return !s.fromFb;});
+      STORIES = fbStories.concat(sampleStories);
+      renderFeed(curFeed);
+      toast('✅ 커뮤니티 사연을 불러왔어요');
+    });
+  }catch(e){
+    console.log('Firebase 불러오기 실패:', e);
+  }
+}
+
+function timeAgo(date){
+  var diff = Math.floor((new Date()-date)/1000);
+  if(diff<60) return '방금';
+  if(diff<3600) return Math.floor(diff/60)+'분 전';
+  if(diff<86400) return Math.floor(diff/3600)+'시간 전';
+  return Math.floor(diff/86400)+'일 전';
 }
 
 // ═══════════════════════════════
