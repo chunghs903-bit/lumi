@@ -491,7 +491,7 @@ max-width:90vw;text-align:center}
 </style>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, addDoc, onSnapshot, orderBy, query, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, onSnapshot, orderBy, query, serverTimestamp, doc, updateDoc, increment, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC7cE6OA29uUX3AYBiUIxohrwntW0G2GFA",
@@ -513,6 +513,10 @@ window.fsOnSnapshot = onSnapshot;
 window.fsOrderBy = orderBy;
 window.fsQuery = query;
 window.fsServerTimestamp = serverTimestamp;
+window.fsDoc = doc;
+window.fsUpdateDoc = updateDoc;
+window.fsIncrement = increment;
+window.fsGetDocs = getDocs;
 
 window.dispatchEvent(new Event('firebaseReady'));
 console.log('Firebase 연결 완료!');
@@ -1204,7 +1208,7 @@ function startApp(){
 }
 
 function loadStoriesFromFirebase(){
-  if(!window.db) return;
+  if(!window.db) { setTimeout(loadStoriesFromFirebase, 1000); return; }
   try{
     var q = window.fsQuery(
       window.fsCollection(window.db,'stories'),
@@ -1214,17 +1218,25 @@ function loadStoriesFromFirebase(){
       var fbStories = [];
       snapshot.forEach(function(doc){
         var d = doc.data();
+        var timeStr = '방금';
+        try{
+          if(d.createdAt){
+            var dt = typeof d.createdAt.toDate==='function' ? d.createdAt.toDate() : new Date(d.createdAt);
+            timeStr = timeAgo(dt);
+          }
+        }catch(e){}
         fbStories.push({
           id: 'fb-'+doc.id,
+          fbId: doc.id,
           nick: d.nick||'익명',
           grade: '🌱 씨앗',
-          av: '익',
+          av: d.nick ? d.nick[0] : '익',
           ac: 'var(--pl)',
           tc: 'var(--purple)',
           emo: d.emo||'우울해',
           eac: d.urgent?'var(--cl)':'var(--pl)',
           etc: d.urgent?'var(--coral)':'var(--purple)',
-          time: d.createdAt ? d.createdAt ? (typeof d.createdAt.toDate === 'function' ? timeAgo(d.createdAt.toDate()) : timeAgo(new Date(d.createdAt))) : '방금' : '방금',
+          time: timeStr,
           body: d.body||'',
           urgent: d.urgent||false,
           likes: d.likes||0,
@@ -1236,15 +1248,33 @@ function loadStoriesFromFirebase(){
           fromFb: true
         });
       });
-      // 기존 샘플 데이터 유지하고 Firebase 사연 앞에 추가
-      var sampleStories = STORIES.filter(function(s){return !s.fromFb;});
-      STORIES = fbStories.concat(sampleStories);
+      // 샘플 데이터 제거하고 Firebase 사연만 표시
+      STORIES = fbStories;
       renderFeed(curFeed);
-      toast('✅ 커뮤니티 사연을 불러왔어요');
+      console.log('Firebase 사연 불러옴:', fbStories.length + '개');
     });
   }catch(e){
     console.log('Firebase 불러오기 실패:', e);
   }
+}
+
+// Firebase에 댓글 저장
+function saveCommentToFirebase(storyFbId, text){
+  if(!window.db || !storyFbId) return;
+  try{
+    window.fsAddDoc(window.fsCollection(window.db, 'stories/'+storyFbId+'/comments'),{
+      nick: '익명',
+      body: text,
+      likes: 0,
+      best: false,
+      createdAt: new Date().toISOString()
+    }).then(function(){
+      console.log('댓글 Firebase 저장 완료 ✅');
+      // 댓글 수 업데이트
+      var docRef = window.fsDoc(window.db, 'stories', storyFbId);
+      window.fsUpdateDoc(docRef, { comments: window.fsIncrement(1) });
+    }).catch(function(e){ console.log('댓글 저장 실패:', e.message); });
+  }catch(e){ console.log('댓글 저장 오류:', e); }
 }
 
 function timeAgo(date){
@@ -1449,7 +1479,7 @@ function addStory(body,emo,urgent){
   addPts(20,'사연 올리기');
 
   // Firebase에 저장
-  if(window.db && window.fsAddDoc && window.fsCollection){
+  if(window.db && window.fsAddDoc && window.fsCollection && window.fsServerTimestamp){
     window.fsAddDoc(window.fsCollection(window.db,'stories'),{
       nick:'익명',
       emo:urgent?'🆘 긴급':emo,
@@ -1458,7 +1488,7 @@ function addStory(body,emo,urgent){
       likes:0,
       comments:0,
       ai:'따뜻한 사연을 나눠주셔서 감사해요.',
-      createdAt:new Date().toISOString() 
+      createdAt:window.fsServerTimestamp()
     }).then(function(){
       console.log('Firebase 저장 완료 ✅');
     }).catch(function(e){
@@ -1552,6 +1582,11 @@ function submitCmt(){
   ta.value=''; ta.style.height='auto';
   addPts(5,'응원 댓글');
   setTimeout(function(){var l=$('cmtList');l.scrollTop=l.scrollHeight;},100);
+
+  // Firebase에 댓글 저장
+  if(s && s.fbId){
+    saveCommentToFirebase(s.fbId, text);
+  }
 }
 
 // ═══════════════════════════════
