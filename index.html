@@ -1224,7 +1224,7 @@ function loadStoriesFromFirebase(){
           emo: d.emo||'우울해',
           eac: d.urgent?'var(--cl)':'var(--pl)',
           etc: d.urgent?'var(--coral)':'var(--purple)',
-          time: d.createdAt ? timeAgo(d.createdAt.toDate()) : '방금',
+          time: d.createdAt ? d.createdAt ? (typeof d.createdAt.toDate === 'function' ? timeAgo(d.createdAt.toDate()) : timeAgo(new Date(d.createdAt))) : '방금' : '방금',
           body: d.body||'',
           urgent: d.urgent||false,
           likes: d.likes||0,
