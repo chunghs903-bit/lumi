@@ -1449,7 +1449,7 @@ function addStory(body,emo,urgent){
   addPts(20,'사연 올리기');
 
   // Firebase에 저장
-  if(window.db && window.fsAddDoc && window.fsCollection && window.fsServerTimestamp){
+  if(window.db && window.fsAddDoc && window.fsCollection){
     window.fsAddDoc(window.fsCollection(window.db,'stories'),{
       nick:'익명',
       emo:urgent?'🆘 긴급':emo,
@@ -1458,7 +1458,7 @@ function addStory(body,emo,urgent){
       likes:0,
       comments:0,
       ai:'따뜻한 사연을 나눠주셔서 감사해요.',
-      createdAt:window.fsServerTimestamp()
+      createdAt:new Date().toISOString()
     }).then(function(){
       console.log('Firebase 저장 완료 ✅');
     }).catch(function(e){
