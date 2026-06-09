@@ -1447,6 +1447,26 @@ function addStory(body,emo,urgent){
     ai:'따뜻한 사연을 나눠주셔서 감사해요.',aiColor:'var(--coral)',aiBg:'var(--cl)',mine:true};
   STORIES.unshift(ns); CMTS[ns.id]=[];
   addPts(20,'사연 올리기');
+
+  // Firebase에 저장
+  if(window.db && window.fsAddDoc && window.fsCollection && window.fsServerTimestamp){
+    window.fsAddDoc(window.fsCollection(window.db,'stories'),{
+      nick:'익명',
+      emo:urgent?'🆘 긴급':emo,
+      body:body,
+      urgent:urgent||false,
+      likes:0,
+      comments:0,
+      ai:'따뜻한 사연을 나눠주셔서 감사해요.',
+      createdAt:window.fsServerTimestamp()
+    }).then(function(){
+      console.log('Firebase 저장 완료 ✅');
+    }).catch(function(e){
+      console.log('Firebase 저장 실패:', e.message);
+    });
+  } else {
+    console.log('Firebase 아직 준비 안됨 - 로컬에만 저장');
+  }
 }
 
 // ═══════════════════════════════
